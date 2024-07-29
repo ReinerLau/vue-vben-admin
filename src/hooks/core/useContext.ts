@@ -39,6 +39,13 @@ export function createContext<T>(
 
 export function useContext<T>(key: InjectionKey<T>, native?: boolean): T;
 
+/**
+ * 注入来自祖先组件的值
+ * @param key - 祖先组件提供的 key
+ * @param defaultValue - 祖先组件未提供时的默认值
+ * @returns {any} 返回祖先组件提供的值
+ * @tutorial https://cn.vuejs.org/api/composition-api-dependency-injection.html#inject
+ */
 export function useContext<T>(
   key: InjectionKey<T> = Symbol(),
   defaultValue?: any,
