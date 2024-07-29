@@ -1,7 +1,3 @@
-/**
- * // [x]
- * @description 赋予组件提供上下文能力的 hook
- */
 import {
   readonly as defineReadonly,
   inject,
@@ -21,6 +17,17 @@ type ShallowUnwrap<T> = {
   [P in keyof T]: UnwrapRef<T[P]>;
 };
 
+/**
+ * 祖先组件提供上下文
+ * @param context - 祖先组件提供的值
+ * @param key - 祖先组件提供的 key
+ * @param options - 配置项
+ * @param options.readonly - 是否只读
+ * @param options.createProvider - 是否创建 provider
+ * @param options.native - 是否使用原生的上下文，不做响应式处理
+ * @returns 响应式上下文
+ * @tutorial https://cn.vuejs.org/api/composition-api-dependency-injection.html#provide
+ */
 export function createContext<T>(
   context: any,
   key: InjectionKey<T> = Symbol(),
@@ -43,7 +50,7 @@ export function useContext<T>(key: InjectionKey<T>, native?: boolean): T;
  * 注入来自祖先组件的值
  * @param key - 祖先组件提供的 key
  * @param defaultValue - 祖先组件未提供时的默认值
- * @returns {any} 返回祖先组件提供的值
+ * @returns 返回祖先组件提供的值
  * @tutorial https://cn.vuejs.org/api/composition-api-dependency-injection.html#inject
  */
 export function useContext<T>(
