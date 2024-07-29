@@ -1,5 +1,9 @@
-import { InjectionKey, Ref } from 'vue';
+/**
+ * // [x]
+ * @description 赋予 AppProvider 组件提供上下文能力的 hook
+ */
 import { createContext, useContext } from '@/hooks/core/useContext';
+import { InjectionKey, Ref } from 'vue';
 
 export interface AppProviderContextProps {
   prefixCls: Ref<string>;
