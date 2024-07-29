@@ -1,5 +1,9 @@
-import { ref, unref } from 'vue';
+/**
+ * // [x]
+ * @description 倒计时 hook
+ */
 import { tryOnUnmounted } from '@vueuse/core';
+import { ref, unref } from 'vue';
 
 export function useCountdown(count: number) {
   const currentCount = ref(count);

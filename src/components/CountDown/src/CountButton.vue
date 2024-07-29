@@ -4,11 +4,15 @@
   </Button>
 </template>
 <script lang="ts" setup>
-  import { ref, watchEffect, computed, unref } from 'vue';
-  import { Button } from 'ant-design-vue';
-  import { useCountdown } from './useCountdown';
-  import { isFunction } from '@/utils/is';
+  /**
+   * // [x]
+   * @description 获取验证码倒计时按钮
+   */
   import { useI18n } from '@/hooks/web/useI18n';
+  import { isFunction } from '@/utils/is';
+  import { Button } from 'ant-design-vue';
+  import { computed, ref, unref, watchEffect } from 'vue';
+  import { useCountdown } from './useCountdown';
 
   defineOptions({ name: 'CountButton' });
 
