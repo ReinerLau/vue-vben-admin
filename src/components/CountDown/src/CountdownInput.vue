@@ -10,8 +10,7 @@
 </template>
 <script lang="ts" setup>
   /**
-   * // [x]
-   * @description 验证码输入框
+   * 验证码输入框
    */
   import { useRuleFormItem } from '@/hooks/component/useFormItem';
   import { useDesign } from '@/hooks/web/useDesign';
