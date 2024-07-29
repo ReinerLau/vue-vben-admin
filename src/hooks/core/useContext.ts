@@ -1,9 +1,13 @@
+/**
+ * // [x]
+ * @description 赋予组件提供上下文能力的 hook
+ */
 import {
+  readonly as defineReadonly,
+  inject,
   InjectionKey,
   provide,
-  inject,
   reactive,
-  readonly as defineReadonly,
   UnwrapRef,
 } from 'vue';
 
