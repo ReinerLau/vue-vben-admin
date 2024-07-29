@@ -1,26 +1,30 @@
+/**
+ * // [x]
+ * @description 存放了各种用于校验的工具函数
+ */
 export {
   isArguments,
   isArrayBuffer,
   isArrayLike,
   isArrayLikeObject,
-  isBuffer,
   isBoolean,
+  isBuffer,
   isDate,
   isElement,
   isEmpty,
   isEqual,
   isEqualWith,
   isError,
-  isFunction,
   isFinite,
+  isFunction,
   isLength,
   isMap,
   isMatch,
   isMatchWith,
   isNative,
   isNil,
-  isNumber,
   isNull,
+  isNumber,
   isObjectLike,
   isPlainObject,
   isRegExp,
@@ -43,12 +47,10 @@ export function isDef<T = unknown>(val?: T): val is T {
   return typeof val !== 'undefined';
 }
 
-// TODO 此处 isObject 存在歧义
 export function isObject(val: any): val is Record<any, any> {
   return val !== null && is(val, 'Object');
 }
 
-// TODO 此处 isArray 存在歧义
 export function isArray(val: any): val is Array<any> {
   return val && Array.isArray(val);
 }
