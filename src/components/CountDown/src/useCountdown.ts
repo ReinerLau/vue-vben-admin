@@ -1,7 +1,3 @@
-/**
- * // [x]
- * @description 倒计时 hook
- */
 import { tryOnUnmounted } from '@vueuse/core';
 import { ref, unref } from 'vue';
 
