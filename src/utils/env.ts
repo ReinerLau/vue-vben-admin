@@ -1,6 +1,6 @@
 import type { GlobEnvConfig } from '#/config';
-import pkg from '../../package.json';
 import { API_ADDRESS } from '@/enums/cacheEnum';
+import pkg from '../../package.json';
 
 export function getCommonStoragePrefix() {
   const { VITE_GLOB_APP_TITLE } = getAppEnvConfig();
@@ -13,12 +13,20 @@ export function getStorageShortName() {
 }
 
 const getVariableName = (title: string) => {
+  /**
+   * 将字符串转换成16进制字符串, 为了加密，增加阅读难度
+   * @param str 要转换的字符串
+   * @returns 16进制字符串
+   */
   function strToHex(str: string) {
     const result: string[] = [];
     for (let i = 0; i < str.length; ++i) {
+      // 每个字符转换成 Unicode 编码后转成 16 进制字符串
       const hex = str.charCodeAt(i).toString(16);
+      // 是为了保证每个十六进制字符都是4位，方便还原成原始字符串
       result.push(('000' + hex).slice(-4));
     }
+    // 每个字符转成16进制后拼接成字符串, 大写可要可不要
     return result.join('').toUpperCase();
   }
   return `__PRODUCTION__${strToHex(title) || '__APP'}__CONF__`.toUpperCase().replace(/\s/g, '');
