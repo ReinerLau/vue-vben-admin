@@ -11,10 +11,15 @@ export function getCommonStoragePrefix() {
 export function getStorageShortName() {
   return `${getCommonStoragePrefix()}${`__${pkg.version}`}__`.toUpperCase();
 }
-
+/**
+ * 基于标题转换成变量名, 用于访问生产环境全局变量
+ * @param title 要转换成十六进制字符串的标题
+ * @returns 以 __PRODUCTION__xxx_CONF__ 格式的字符串
+ * @tutorial https://doc.vvbin.cn/guide/settings.html#%E8%AF%B4%E6%98%8E
+ */
 const getVariableName = (title: string) => {
   /**
-   * 将字符串转换成16进制字符串, 为了加密，增加阅读难度
+   * 将字符串转换成16进制字符串, 为了加密
    * @param str 要转换的字符串
    * @returns 16进制字符串
    */
@@ -23,10 +28,10 @@ const getVariableName = (title: string) => {
     for (let i = 0; i < str.length; ++i) {
       // 每个字符转换成 Unicode 编码后转成 16 进制字符串
       const hex = str.charCodeAt(i).toString(16);
-      // 是为了保证每个十六进制字符都是4位，方便还原成原始字符串
+      // 是为了保证每个十六进制字符都是 4 位，方便还原成原始字符串
       result.push(('000' + hex).slice(-4));
     }
-    // 每个字符转成16进制后拼接成字符串, 大写可要可不要
+    // 每个字符转成十六进制后拼接成字符串, 大写可要可不要
     return result.join('').toUpperCase();
   }
   return `__PRODUCTION__${strToHex(title) || '__APP'}__CONF__`.toUpperCase().replace(/\s/g, '');
