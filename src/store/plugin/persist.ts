@@ -28,16 +28,22 @@ const persistEncryption: Encryption = EncryptionFactory.createAesEncryption({
 /**
  * @description 自定义序列化器，用于序列化和反序列化存储数据
  * @param shouldEnableEncryption 是否对缓存加密, 生产环境下开启
- * @returns 带有序列序列化和反序列化方法的对象
+ * @returns 带有序列化和反序列化方法的对象
  */
 function customSerializer(shouldEnableEncryption: boolean): Serializer {
   if (shouldEnableEncryption) {
     return {
       deserialize: (value) => {
+        /**
+         * @description 解密后反序列化
+         */
         const decrypted = persistEncryption.decrypt(value);
         return JSON.parse(decrypted);
       },
       serialize: (value) => {
+        /**
+         * @description 序列化后加密
+         */
         const serialized = JSON.stringify(value);
         return persistEncryption.encrypt(serialized);
       },
