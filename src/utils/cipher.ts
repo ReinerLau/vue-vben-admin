@@ -24,6 +24,9 @@ export interface EncryptionParams {
   iv: string;
 }
 
+/**
+ * @description AES 加密解密器
+ */
 class AesEncryption implements Encryption {
   private readonly key;
   private readonly iv;
