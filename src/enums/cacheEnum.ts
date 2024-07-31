@@ -11,6 +11,10 @@ export const ROLES_KEY = 'ROLES__KEY__';
 
 // project config key
 export const PROJ_CFG_KEY = 'PROJ__CFG__KEY__';
+
+/**
+ * @description 将接口地址存储在localStorage中的key
+ */
 export const API_ADDRESS = 'API_ADDRESS__';
 
 // lock info
