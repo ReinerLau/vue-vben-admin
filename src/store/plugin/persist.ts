@@ -61,9 +61,7 @@ function customSerializer(shouldEnableEncryption: boolean): Serializer {
 }
 
 /**
- * Register Pinia Persist Plugin
- * 注册 Pinia 持久化插件
- *
+ * @description 注册 Pinia 持久化插件
  * @param pinia Pinia instance Pinia 实例
  */
 export function registerPiniaPersistPlugin(pinia: Pinia) {
