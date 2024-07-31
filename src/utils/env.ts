@@ -37,18 +37,50 @@ const getVariableName = (title: string) => {
   return `__PRODUCTION__${strToHex(title) || '__APP'}__CONF__`.toUpperCase().replace(/\s/g, '');
 };
 
+/**
+ * @description 获取环境变量配置
+ * @returns result.VITE_GLOB_APP_TITLE 网站标题
+ * @returns result.VITE_GLOB_API_URL 接口地址
+ * @returns result.VITE_GLOB_API_URL_PREFIX 接口地址前缀
+ * @returns result.VITE_GLOB_UPLOAD_URL 文件上传接口地址
+ */
 export function getAppEnvConfig() {
+  /**
+   * @description import.meta.env.VITE_GLOB_APP_TITLE 是从 .env 文件中读取的环境变量
+   * @tutorial https://cn.vitejs.dev/guide/env-and-mode.html#env-variables
+   * @tutorial https://cn.vitejs.dev/guide/env-and-mode.html#env-files
+   * @description 以 VITE_GLOB_* 开头的的变量，在打包的时候，会被加入_app.config.js配置文件当中
+   * @description VITE_GLOB_APP_TITLE 环境变量指的是网站标题
+   * @tutorial https://doc.vvbin.cn/guide/settings.html#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE
+   */
   const ENV_NAME = getVariableName(import.meta.env.VITE_GLOB_APP_TITLE);
+
+  /**
+   * @description import.meta.env.DEV 是 Vite 内置的环境变量，用于判断当前环境是否是开发环境
+   * @tutorial https://cn.vitejs.dev/guide/env-and-mode.html#env-variables
+   * @description 如果是在开发环境，那么直接使用 import.meta.env 读取本地 .env 文件环境变量, 如果是生产环境，那么使用 window[ENV_NAME] 读取打包后 _app.config.js 注入的全局变量
+   * @tutorial https://doc.vvbin.cn/guide/settings.html#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE
+   */
   const ENV = import.meta.env.DEV
-    ? // Get the global configuration (the configuration will be extracted independently when packaging)
-      (import.meta.env as unknown as GlobEnvConfig)
+    ? (import.meta.env as unknown as GlobEnvConfig)
     : (window[ENV_NAME] as unknown as GlobEnvConfig);
+
   const { VITE_GLOB_APP_TITLE, VITE_GLOB_API_URL_PREFIX, VITE_GLOB_UPLOAD_URL } = ENV;
+
+  /**
+   * @description 从环境变量中获取接口地址
+   * @tutorial https://doc.vvbin.cn/guide/settings.html#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE
+   */
   let { VITE_GLOB_API_URL } = ENV;
+
+  /**
+   * @description  从缓存中获取接口地址, 因为用户可能会从页面上修改接口地址
+   */
   if (localStorage.getItem(API_ADDRESS)) {
     const address = JSON.parse(localStorage.getItem(API_ADDRESS) || '{}');
     if (address?.key) VITE_GLOB_API_URL = address?.val;
   }
+
   return {
     VITE_GLOB_APP_TITLE,
     VITE_GLOB_API_URL,
