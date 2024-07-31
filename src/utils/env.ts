@@ -123,9 +123,9 @@ export function getEnv(): string {
 }
 
 /**
- * @description: Is it a development mode
- * @returns:
- * @example:
+ * @description: 是否是开发模式
+ * @returns boolean
+ * @tutorial https://cn.vitejs.dev/guide/env-and-mode.html#env-variables
  */
 export function isDevMode(): boolean {
   return import.meta.env.DEV;
