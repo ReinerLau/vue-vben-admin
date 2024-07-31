@@ -63,6 +63,7 @@ function customSerializer(shouldEnableEncryption: boolean): Serializer {
 /**
  * @description 注册 Pinia 持久化插件
  * @param pinia Pinia instance Pinia 实例
+ * @tutorial https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/advanced.html#%E5%85%A8%E5%B1%80%E6%8C%81%E4%B9%85%E5%8C%96%E9%85%8D%E7%BD%AE
  */
 export function registerPiniaPersistPlugin(pinia: Pinia) {
   pinia.use(createPersistedState(createPersistedStateOptions(PERSIST_KEY_PREFIX)));
