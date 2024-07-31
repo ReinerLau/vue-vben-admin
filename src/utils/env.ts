@@ -100,9 +100,12 @@ export const devMode = 'development';
 export const prodMode = 'production';
 
 /**
- * @description: Get environment variables
- * @returns:
- * @example:
+ * @description: 从环境变量中获取运行模式
+ * @returns: 运行模式
+ * @example: production
+ * @example: development
+ * @tutorial https://cn.vitejs.dev/guide/env-and-mode.html#env-variables
+ * @tutorial https://cn.vitejs.dev/guide/env-and-mode.html#modes
  */
 export function getEnv(): string {
   return import.meta.env.MODE;
