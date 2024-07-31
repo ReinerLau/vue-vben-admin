@@ -134,6 +134,9 @@ class SHA512Hashing implements Hashing {
   }
 }
 
+/**
+ * @description 创建加密器的工厂
+ */
 export class EncryptionFactory {
   public static createAesEncryption(params: EncryptionParams): Encryption {
     return new AesEncryption(params);
