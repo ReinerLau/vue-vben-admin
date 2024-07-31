@@ -10,4 +10,7 @@ export const cacheCipher = {
 };
 
 // Whether the system cache is encrypted using aes
+/**
+ * @description 缓存是否使用 aes 加密, 默认生产环境下开启
+ */
 export const SHOULD_ENABLE_STORAGE_ENCRYPTION = !isDevMode();
