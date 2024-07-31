@@ -23,11 +23,9 @@ const persistEncryption: Encryption = EncryptionFactory.createAesEncryption({
 });
 
 /**
- * Custom serializer for serialization and deserialization of storage data
- * 自定义序列化器，用于序列化和反序列化存储数据
- *
- * @param shouldEnableEncryption whether to enable encryption for storage data 是否启用存储数据加密
- * @returns serializer
+ * @description 自定义序列化器，用于序列化和反序列化存储数据
+ * @param shouldEnableEncryption 是否对缓存加密, 生产环境下开启
+ * @returns 带有序列序列化和反序列化方法的对象
  */
 function customSerializer(shouldEnableEncryption: boolean): Serializer {
   if (shouldEnableEncryption) {
