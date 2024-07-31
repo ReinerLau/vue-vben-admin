@@ -4,13 +4,17 @@
  * @link https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/
  *
  */
-import type { Pinia } from 'pinia';
-import { createPersistedState, Serializer } from 'pinia-plugin-persistedstate';
-import type { PersistedStateFactoryOptions } from 'pinia-plugin-persistedstate';
-import { getCommonStoragePrefix } from '@/utils/env';
-import { Encryption, EncryptionFactory } from '@/utils/cipher';
 import { cacheCipher, SHOULD_ENABLE_STORAGE_ENCRYPTION } from '@/settings/encryptionSetting';
+import { Encryption, EncryptionFactory } from '@/utils/cipher';
+import { getCommonStoragePrefix } from '@/utils/env';
+import type { Pinia } from 'pinia';
+import type { PersistedStateFactoryOptions } from 'pinia-plugin-persistedstate';
+import { createPersistedState, Serializer } from 'pinia-plugin-persistedstate';
 
+/**
+ * @description 缓存 key 前缀
+ * @example VBEN_ADMIN__DEVELOPMENT
+ */
 export const PERSIST_KEY_PREFIX = getCommonStoragePrefix();
 
 const persistEncryption: Encryption = EncryptionFactory.createAesEncryption({
