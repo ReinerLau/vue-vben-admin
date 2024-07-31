@@ -2,8 +2,19 @@ import type { GlobEnvConfig } from '#/config';
 import { API_ADDRESS } from '@/enums/cacheEnum';
 import pkg from '../../package.json';
 
+/**
+ * @description 生成缓存key前缀
+ * @returns 网站标题与当前模式的拼接字符串（大写）
+ * @example VBEN_ADMIN__DEVELOPMENT
+ */
 export function getCommonStoragePrefix() {
+  /**
+   * @description 从环境变量中获取网站标题
+   */
   const { VITE_GLOB_APP_TITLE } = getAppEnvConfig();
+  /**
+   * @description 拼接网站标题与运行模式字符串
+   */
   return `${VITE_GLOB_APP_TITLE.replace(/\s/g, '_')}__${getEnv()}`.toUpperCase();
 }
 
