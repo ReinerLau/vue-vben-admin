@@ -17,6 +17,9 @@ import { createPersistedState, Serializer } from 'pinia-plugin-persistedstate';
  */
 export const PERSIST_KEY_PREFIX = getCommonStoragePrefix();
 
+/**
+ * @description aes 加密器
+ */
 const persistEncryption: Encryption = EncryptionFactory.createAesEncryption({
   key: cacheCipher.key,
   iv: cacheCipher.iv,
@@ -62,11 +65,9 @@ export function registerPiniaPersistPlugin(pinia: Pinia) {
 }
 
 /**
- * Create Persisted State Options
- * 创建持久化状态选项
- *
- * @param keyPrefix prefix for storage key 储存键前缀
- * @returns persisted state factory options
+ * @description 创建持久化状态选项
+ * @param keyPrefix 缓存 key 前缀
+ * @returns 持久化状态选项
  */
 export function createPersistedStateOptions(keyPrefix: string): PersistedStateFactoryOptions {
   return {
