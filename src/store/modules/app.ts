@@ -95,7 +95,10 @@ export const useAppStore = defineStore({
     setBeforeMiniInfo(state: BeforeMiniState): void {
       this.beforeMiniInfo = state;
     },
-
+    /**
+     * @description 缓存新的项目配置
+     * @param config 新的项配置
+     */
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config) as ProjectConfig;
       Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
