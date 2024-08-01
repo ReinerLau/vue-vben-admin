@@ -53,6 +53,9 @@ function initPersistentMemory() {
   sessionCache && sessionMemory.resetCache(sessionCache);
 }
 
+/**
+ * @description 各种持久化缓存控制的类
+ */
 export class Persistent {
   /**
    * @description 从内存中获取缓存
