@@ -25,6 +25,9 @@ export const LOCK_INFO_KEY = 'LOCK__INFO__KEY__';
 
 export const MULTIPLE_TABS_KEY = 'MULTIPLE_TABS__KEY__';
 
+/**
+ * @description 当前主题的缓存 key
+ */
 export const APP_DARK_MODE_KEY = '__APP__DARK__MODE__';
 
 // base global local key
