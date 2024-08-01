@@ -9,8 +9,7 @@ export const cacheCipher = {
   iv: '@11111000001111_',
 };
 
-// Whether the system cache is encrypted using aes
 /**
- * @description 缓存是否使用 aes 加密, 默认生产环境下开启
+ * @description 是否缓存数据进行加密, 生产环境下开启
  */
 export const SHOULD_ENABLE_STORAGE_ENCRYPTION = !isDevMode();
