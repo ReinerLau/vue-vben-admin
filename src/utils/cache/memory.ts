@@ -50,12 +50,28 @@ export class Memory<T = any, V = any> {
     return this.cache[key];
   }
 
+  /**
+   * @description 在内存中设置缓存
+   * @param key 缓存 key
+   * @param value 缓存 value
+   * @param expires 过期时间
+   */
   set<K extends keyof T>(key: K, value: V, expires?: number) {
+    /**
+     * @description 设置缓存前先查看对应缓存是否已存在
+     */
     let item = this.get(key);
 
+    /**
+     * @description 如果过期时间不存在或者小于等于 0，则将过期时间设置为默认值
+     */
     if (!expires || (expires as number) <= 0) {
       expires = this.alive;
     }
+    /**
+     * @description 如果缓存存在，则清除对缓存的过期时间计算
+     * @description 如果缓存不存在，则创建缓存对象
+     */
     if (item) {
       if (item.timeoutId) {
         clearTimeout(item.timeoutId);
@@ -66,17 +82,21 @@ export class Memory<T = any, V = any> {
       item = { value, alive: expires };
       this.cache[key] = item;
     }
-
+    /**
+     * @description 这句好像是多余的
+     */
     if (!expires) {
       return value;
     }
     const now = new Date().getTime();
     /**
-     * Prevent overflow of the setTimeout Maximum delay value
-     * Maximum delay value 2,147,483,647 ms
-     * https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#maximum_delay_value
+     * @description setTimout 最大延迟时间为 2,147,483,647 ms
+     * @tutorial https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#maximum_delay_value
      */
     item.time = expires > now ? expires : now + expires;
+    /**
+     * @description 设置缓存过期时间
+     */
     item.timeoutId = setTimeout(
       () => {
         this.remove(key);
