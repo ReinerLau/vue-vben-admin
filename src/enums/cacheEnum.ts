@@ -32,7 +32,9 @@ export const MULTIPLE_TABS_KEY = 'MULTIPLE_TABS__KEY__';
  */
 export const APP_DARK_MODE_KEY = '__APP__DARK__MODE__';
 
-// base global local key
+/**
+ * @description 存储到 localStorage 中所有内存缓存的key
+ */
 export const APP_LOCAL_CACHE_KEY = 'COMMON__LOCAL__KEY__';
 
 // base global session key
