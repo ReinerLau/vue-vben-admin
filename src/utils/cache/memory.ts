@@ -39,6 +39,10 @@ export class Memory<T = any, V = any> {
   //   return item?.value ?? undefined;
   // }
 
+  /**
+   * @description 从内存中获取缓存
+   * @param key 缓存 key
+   */
   get<K extends keyof T>(key: K) {
     return this.cache[key];
   }
