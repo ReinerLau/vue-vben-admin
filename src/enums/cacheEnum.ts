@@ -12,7 +12,9 @@ export const USER_INFO_KEY = 'USER__INFO__';
 // role info key
 export const ROLES_KEY = 'ROLES__KEY__';
 
-// project config key
+/**
+ * @description 项目配置的缓存 key
+ */
 export const PROJ_CFG_KEY = 'PROJ__CFG__KEY__';
 
 /**
