@@ -18,6 +18,9 @@ import { deepMerge } from '@/utils';
 import { Persistent } from '@/utils/cache/persistent';
 
 interface AppState {
+  /**
+   * @description 主题
+   */
   darkMode?: ThemeEnum;
   // Page loading status
   pageLoading: boolean;
@@ -34,9 +37,6 @@ let timeId: TimeoutHandle;
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
-    /**
-     * @description 深色模式状态
-     */
     darkMode: undefined,
     pageLoading: false,
     projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
