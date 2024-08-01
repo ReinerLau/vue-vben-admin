@@ -54,6 +54,10 @@ function initPersistentMemory() {
 }
 
 export class Persistent {
+  /**
+   * @description 从内存中获取缓存
+   * @param key 缓存 key
+   */
   static getLocal<T>(key: LocalKeys) {
     return localMemory.get(key)?.value as Nullable<T>;
   }
