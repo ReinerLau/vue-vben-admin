@@ -15,6 +15,9 @@ export class Memory<T = any, V = any> {
    * 缓存对象
    */
   private cache: { [key in keyof T]?: Cache<V> } = {};
+  /**
+   * @description 缓存存活时间
+   */
   private alive: number;
 
   constructor(alive = NOT_ALIVE) {
