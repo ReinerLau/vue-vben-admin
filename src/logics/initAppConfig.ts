@@ -30,6 +30,9 @@ export function initAppConfigStore() {
    * @description 应用相关配置 store
    */
   const appStore = useAppStore();
+  /**
+   * @description 项目配置
+   */
   let projCfg: ProjectConfig = Persistent.getLocal(PROJ_CFG_KEY) as ProjectConfig;
   projCfg = deepMerge(projectSetting, projCfg || {});
   const darkMode = appStore.getDarkMode;
