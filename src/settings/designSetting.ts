@@ -4,6 +4,10 @@ export const prefixCls = 'vben';
 
 export const multipleTabHeight = 30;
 
+/**
+ * @description 当前主题
+ * @example 'light' | 'dark'
+ */
 export const darkMode = ThemeEnum.LIGHT;
 
 // 页脚固定高度
