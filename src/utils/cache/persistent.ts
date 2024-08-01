@@ -62,6 +62,12 @@ export class Persistent {
     return localMemory.get(key)?.value as Nullable<T>;
   }
 
+  /**
+   * @description 设置缓存到内存和 localStorage 中
+   * @param key 缓存 key
+   * @param value 缓存值
+   * @param immediate 是否立即同步到 localStorage, 默认不同步
+   */
   static setLocal(key: LocalKeys, value: LocalStore[LocalKeys], immediate = false): void {
     localMemory.set(key, toRaw(value));
     immediate && ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache);
