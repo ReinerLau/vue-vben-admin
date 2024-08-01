@@ -123,8 +123,7 @@ export function getEnv(): string {
 }
 
 /**
- * @description: 是否是开发模式
- * @returns boolean
+ * @description: 应用是否运行在开发环境
  * @tutorial https://cn.vitejs.dev/guide/env-and-mode.html#env-variables
  */
 export function isDevMode(): boolean {
