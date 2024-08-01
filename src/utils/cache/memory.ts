@@ -7,6 +7,9 @@ export interface Cache<V = any> {
 
 const NOT_ALIVE = 0;
 
+/**
+ * @description 内存缓存控制类
+ */
 export class Memory<T = any, V = any> {
   private cache: { [key in keyof T]?: Cache<V> } = {};
   private alive: number;
