@@ -83,7 +83,10 @@ export class Memory<T = any, V = any> {
 
     return value;
   }
-
+  /**
+   * @description 从内存中删除缓存
+   * @param key 缓存 key
+   */
   remove<K extends keyof T>(key: K) {
     const item = this.get(key);
     Reflect.deleteProperty(this.cache, key);
