@@ -1,20 +1,31 @@
 import type { LocaleSetting, LocaleType } from '#/config';
 
-import { defineStore } from 'pinia';
 import { store } from '@/store';
+import { defineStore } from 'pinia';
 
 import { LOCALE_KEY } from '@/enums/cacheEnum';
-import { createLocalStorage } from '@/utils/cache';
 import { localeSetting } from '@/settings/localeSetting';
+import { createLocalStorage } from '@/utils/cache';
 
+/**
+ * @description 基于 localStorage 的控制缓存对象
+ */
 const ls = createLocalStorage();
 
+/**
+ * @description localeStorage 缓存中的国际化相关配置
+ * @description 从 localeStorage 缓存中读取国际化相关配置
+ * @description 如果没有读取到，则使用默认配置
+ */
 const lsLocaleSetting = (ls.get(LOCALE_KEY) || localeSetting) as LocaleSetting;
 
 interface LocaleState {
   localInfo: LocaleSetting;
 }
 
+/**
+ * @description 国际化 store
+ */
 export const useLocaleStore = defineStore({
   id: 'app-locale',
   state: (): LocaleState => ({

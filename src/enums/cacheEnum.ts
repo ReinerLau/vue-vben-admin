@@ -1,6 +1,9 @@
 // token key
 export const TOKEN_KEY = 'TOKEN__';
 
+/**
+ * @description 缓存国际化相关配置的 key
+ */
 export const LOCALE_KEY = 'LOCALE__';
 
 // user info key

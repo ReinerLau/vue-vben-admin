@@ -1,11 +1,14 @@
-import type { DropMenu } from '../components/Dropdown';
 import type { LocaleSetting, LocaleType } from '#/config';
+import type { DropMenu } from '../components/Dropdown';
 
 export const LOCALE: { [key: string]: LocaleType } = {
   ZH_CN: 'zh_CN',
   EN_US: 'en',
 };
 
+/**
+ * @description 国际化相关配置
+ */
 export const localeSetting: LocaleSetting = {
   showPicker: true,
   // Locale

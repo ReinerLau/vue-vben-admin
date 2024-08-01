@@ -22,6 +22,9 @@ import { Persistent } from '@/utils/cache/persistent';
 
 // Initial project configuration
 export function initAppConfigStore() {
+  /**
+   * @description 国际化 store
+   */
   const localeStore = useLocaleStore();
   const appStore = useAppStore();
   let projCfg: ProjectConfig = Persistent.getLocal(PROJ_CFG_KEY) as ProjectConfig;

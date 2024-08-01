@@ -1,9 +1,12 @@
+/**
+ * @description 数据加密相关
+ */
 import { decrypt as aesDecrypt, encrypt as aesEncrypt } from 'crypto-js/aes';
-import UTF8, { parse } from 'crypto-js/enc-utf8';
-import pkcs7 from 'crypto-js/pad-pkcs7';
-import CTR from 'crypto-js/mode-ctr';
 import Base64 from 'crypto-js/enc-base64';
+import UTF8, { parse } from 'crypto-js/enc-utf8';
 import MD5 from 'crypto-js/md5';
+import CTR from 'crypto-js/mode-ctr';
+import pkcs7 from 'crypto-js/pad-pkcs7';
 import SHA256 from 'crypto-js/sha256';
 import SHA512 from 'crypto-js/sha512';
 
@@ -141,6 +144,9 @@ class SHA512Hashing implements Hashing {
  * @description 创建加密器的工厂
  */
 export class EncryptionFactory {
+  /**
+   * @description 创建 AES 加密器
+   */
   public static createAesEncryption(params: EncryptionParams): Encryption {
     return new AesEncryption(params);
   }
