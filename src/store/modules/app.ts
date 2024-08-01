@@ -46,6 +46,12 @@ export const useAppStore = defineStore({
     getPageLoading(state): boolean {
       return state.pageLoading;
     },
+    /**
+     * @description 获取主题配置
+     * @description 获取优先级：当前状态 -> localStorage -> 默认配置
+     * @param state 当前状态
+     * @returns 'light' | 'dark' | string
+     */
     getDarkMode(state): 'light' | 'dark' | string {
       return state.darkMode || localStorage.getItem(APP_DARK_MODE_KEY) || darkMode;
     },
