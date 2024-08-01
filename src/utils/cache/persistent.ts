@@ -40,6 +40,9 @@ type SessionKeys = keyof SessionStore;
 const ls = createLocalStorage();
 const ss = createSessionStorage();
 
+/**
+ * @description 内存缓存控制实例
+ */
 const localMemory = new Memory(DEFAULT_CACHE_TIME);
 const sessionMemory = new Memory(DEFAULT_CACHE_TIME);
 
