@@ -26,6 +26,9 @@ export function initAppConfigStore() {
    * @description 国际化 store
    */
   const localeStore = useLocaleStore();
+  /**
+   * @description 应用相关配置 store
+   */
   const appStore = useAppStore();
   let projCfg: ProjectConfig = Persistent.getLocal(PROJ_CFG_KEY) as ProjectConfig;
   projCfg = deepMerge(projectSetting, projCfg || {});

@@ -1,21 +1,21 @@
 import type {
-  ProjectConfig,
   HeaderSetting,
   MenuSetting,
-  TransitionSetting,
   MultiTabsSetting,
+  ProjectConfig,
+  TransitionSetting,
 } from '#/config';
-import type { BeforeMiniState, ApiAddress } from '#/store';
+import type { ApiAddress, BeforeMiniState } from '#/store';
 
-import { defineStore } from 'pinia';
 import { store } from '@/store';
+import { defineStore } from 'pinia';
 
 import { ThemeEnum } from '@/enums/appEnum';
-import { APP_DARK_MODE_KEY, PROJ_CFG_KEY, API_ADDRESS } from '@/enums/cacheEnum';
-import { Persistent } from '@/utils/cache/persistent';
-import { darkMode } from '@/settings/designSetting';
+import { API_ADDRESS, APP_DARK_MODE_KEY, PROJ_CFG_KEY } from '@/enums/cacheEnum';
 import { resetRouter } from '@/router';
+import { darkMode } from '@/settings/designSetting';
 import { deepMerge } from '@/utils';
+import { Persistent } from '@/utils/cache/persistent';
 
 interface AppState {
   darkMode?: ThemeEnum;
@@ -27,6 +27,10 @@ interface AppState {
   beforeMiniInfo: BeforeMiniState;
 }
 let timeId: TimeoutHandle;
+
+/**
+ * @description 应用相关配置 store
+ */
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
