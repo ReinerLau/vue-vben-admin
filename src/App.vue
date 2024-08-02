@@ -16,11 +16,11 @@
   import 'dayjs/locale/zh-cn';
   import { computed } from 'vue';
 
-  // support Multi-language
   const { getAntdLocale } = useLocale();
 
   const { isDark, darkTheme } = useDarkModeTheme();
 
+  // TODO
   const themeConfig = computed(() =>
     Object.assign(
       {
