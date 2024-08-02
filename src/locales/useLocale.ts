@@ -29,6 +29,9 @@ function setI18nLanguage(locale: LocaleType) {
 
 export function useLocale() {
   const localeStore = useLocaleStoreWithOut();
+  /**
+   * 当前语言
+   */
   const getLocale = computed(() => localeStore.getLocale);
   const getShowLocalePicker = computed(() => localeStore.getShowPicker);
 
