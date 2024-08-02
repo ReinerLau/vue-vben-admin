@@ -9,6 +9,7 @@ export enum ContentEnum {
 }
 
 // menu theme enum
+// TODO
 export enum ThemeEnum {
   DARK = 'dark',
   LIGHT = 'light',
