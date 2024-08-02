@@ -36,6 +36,9 @@ export function useLocale() {
   const getShowLocalePicker = computed(() => localeStore.getShowPicker);
 
   const getAntdLocale = computed((): any => {
+    /**
+     * 获取当前语言对应的一系列映射
+     */
     const localeMessage = i18n.global.getLocaleMessage<{ antdLocale: Locale }>(unref(getLocale));
     return localeMessage?.antdLocale ?? {};
   });
@@ -72,6 +75,9 @@ export function useLocale() {
      */
     getShowLocalePicker,
     changeLocale,
+    /**
+     * 获取当前语言下 antd 组件的一系列映射
+     */
     getAntdLocale,
   };
 }
