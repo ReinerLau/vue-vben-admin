@@ -12,7 +12,9 @@ export function useDarkModeTheme() {
   };
 
   return {
-    // TODO
+    /**
+     * 是否为深色模式
+     */
     isDark,
     // TODO
     darkTheme,
