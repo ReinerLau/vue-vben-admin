@@ -15,6 +15,9 @@ export let i18n: ReturnType<typeof createI18n>;
 
 async function createI18nOptions(): Promise<I18nOptions> {
   const localeStore = useLocaleStoreWithOut();
+  /**
+   * 当前语言
+   */
   const locale = localeStore.getLocale;
   const defaultLocal = await import(`./lang/${locale}.ts`);
   const message = defaultLocal.default?.message ?? {};
