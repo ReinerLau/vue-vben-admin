@@ -7,7 +7,7 @@ export const LOCALE: { [key: string]: LocaleType } = {
 };
 
 /**
- * @description 国际化相关配置
+ * @description 国际化默认配置
  */
 export const localeSetting: LocaleSetting = {
   showPicker: true,
