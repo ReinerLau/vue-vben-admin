@@ -32,6 +32,10 @@ export const useLocaleStore = defineStore({
     localInfo: lsLocaleSetting,
   }),
   getters: {
+    /**
+     * 是否显示语言切换组件
+     * @example 默认为 true 表示显示
+     */
     getShowPicker(state): boolean {
       return !!state.localInfo?.showPicker;
     },
