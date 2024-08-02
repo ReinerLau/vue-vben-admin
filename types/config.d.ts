@@ -70,8 +70,9 @@ export interface LocaleSetting {
    * @example 默认为 true 表示显示
    */
   showPicker: boolean;
-  // Current language
-  // TODO
+  /**
+   * 当前语言
+   */
   locale: LocaleType;
   // default language
   // TODO
