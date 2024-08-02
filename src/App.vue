@@ -20,7 +20,10 @@
 
   const { isDark, darkTheme } = useDarkModeTheme();
 
-  // TODO
+  /**
+   * antd 主题配置
+   * @tutorial https://antdv.com/docs/vue/customize-theme-cn#%E5%AE%9A%E5%88%B6%E4%B8%BB%E9%A2%98
+   */
   const themeConfig = computed(() =>
     Object.assign(
       {
