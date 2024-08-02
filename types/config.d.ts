@@ -78,8 +78,10 @@ export interface LocaleSetting {
    * 如果当前语言找不到对应的 key，则回退到备用语言
    */
   fallback: LocaleType;
-  // available Locales
-  // TODO
+  /**
+   * 可用语言列表
+   * @description 没看懂有什么用
+   */
   availableLocales: LocaleType[];
 }
 
