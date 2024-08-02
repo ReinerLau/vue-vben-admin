@@ -39,6 +39,10 @@ export const useLocaleStore = defineStore({
     getShowPicker(state): boolean {
       return !!state.localInfo?.showPicker;
     },
+    /**
+     * 获取当前语言
+     * @example 默认为 zh_CN
+     */
     getLocale(state): LocaleType {
       return state.localInfo?.locale ?? 'zh_CN';
     },
