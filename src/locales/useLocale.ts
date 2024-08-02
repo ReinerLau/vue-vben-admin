@@ -77,6 +77,7 @@ export function useLocale() {
     changeLocale,
     /**
      * 获取当前语言下 antd 组件的一系列映射
+     * @tutorial https://antdv.com/docs/vue/i18n-cn#configprovider
      */
     getAntdLocale,
   };
