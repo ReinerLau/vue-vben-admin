@@ -1,6 +1,6 @@
+import { useDebounceFn, useThrottleFn } from '@vueuse/core';
 import type { Ref } from 'vue';
-import { ref, watch, unref } from 'vue';
-import { useThrottleFn, useDebounceFn } from '@vueuse/core';
+import { ref, unref, watch } from 'vue';
 
 export type RemoveEventFn = () => void;
 export interface UseEventParams {
@@ -12,6 +12,8 @@ export interface UseEventParams {
   isDebounce?: boolean;
   wait?: number;
 }
+
+// TODO
 export function useEventListener({
   el = window,
   name,
@@ -41,6 +43,10 @@ export function useEventListener({
       (v, _ov, cleanUp) => {
         if (v) {
           !unref(isAddRef) && addEventListener(v);
+          /**
+           * 清理掉对旧元素的事件监听
+           * @tutorial https://www.cnblogs.com/zychuan/p/17130858.html
+           */
           cleanUp(() => {
             autoRemove && removeEventListener(v);
           });
