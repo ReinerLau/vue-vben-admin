@@ -88,7 +88,9 @@ export function useRootSetting() {
     getContentMode,
     getLockTime,
     getThemeColor,
-    // TODO
+    /**
+     * 当前主题
+     */
     getDarkMode,
     setDarkMode,
     getShowDarkModeToggle,
