@@ -11,8 +11,14 @@ import { setHtmlPageLang, setLoadLocalePool } from './helper';
 
 const { fallback, availableLocales } = localeSetting;
 
+/**
+ * vue-i18n 实例
+ */
 export let i18n: ReturnType<typeof createI18n>;
 
+/**
+ * 创建 i18n 配置
+ */
 async function createI18nOptions(): Promise<I18nOptions> {
   const localeStore = useLocaleStoreWithOut();
   /**
@@ -42,7 +48,10 @@ async function createI18nOptions(): Promise<I18nOptions> {
   };
 }
 
-// setup i18n instance with glob
+/**
+ * 初始化 i18n 实例并注册到 vue 应用上
+ * @param app vue 应用实例
+ */
 export async function setupI18n(app: App) {
   const options = await createI18nOptions();
   i18n = createI18n(options);
