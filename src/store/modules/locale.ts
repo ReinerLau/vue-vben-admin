@@ -13,9 +13,9 @@ import { createLocalStorage } from '@/utils/cache';
 const ls = createLocalStorage();
 
 /**
- * @description localeStorage 缓存中的国际化相关配置
- * @description 从 localeStorage 缓存中读取国际化相关配置
- * @description 如果没有读取到，则使用默认配置
+ * @description 国际化相关配置
+ * @example 应用首次加载，尝试从 localeStorage 缓存中读取 key 为 VBEN_ADMIN__DEVELOPMENT__2.11.5__LOCALE__ 的国际化相关配置，没有读取到，使用默认配置
+ * @example 应用再次加载，从 localeStorage 缓存中读取 key 为 VBEN_ADMIN__DEVELOPMENT__2.11.5__LOCALE__ 的国际化相关配置
  */
 const lsLocaleSetting = (ls.get(LOCALE_KEY) || localeSetting) as LocaleSetting;
 
