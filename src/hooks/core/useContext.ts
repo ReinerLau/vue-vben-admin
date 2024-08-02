@@ -8,8 +8,17 @@ import {
 } from 'vue';
 
 export interface CreateContextOptions {
+  /**
+   * 是否只读
+   */
   readonly?: boolean;
+  /**
+   * 是否创建 provider
+   */
   createProvider?: boolean;
+  /**
+   * 是否使用原生的上下文，不做响应式处理
+   */
   native?: boolean;
 }
 
@@ -19,13 +28,9 @@ type ShallowUnwrap<T> = {
 
 /**
  * 祖先组件提供上下文
- * @param context - 祖先组件提供的值
- * @param key - 祖先组件提供的 key
- * @param options - 配置项
- * @param options.readonly - 是否只读
- * @param options.createProvider - 是否创建 provider
- * @param options.native - 是否使用原生的上下文，不做响应式处理
- * @returns 响应式上下文
+ * @param context 祖先组件提供的上下文
+ * @param key 祖先组件提供的 key
+ * @param options 配置项
  * @tutorial https://cn.vuejs.org/api/composition-api-dependency-injection.html#provide
  */
 export function createContext<T>(
@@ -35,7 +40,13 @@ export function createContext<T>(
 ) {
   const { readonly = true, createProvider = true, native = false } = options;
 
+  /**
+   * 响应式上下文
+   */
   const state = reactive(context);
+  /**
+   * 可能只读的响应式上下文
+   */
   const provideData = readonly ? defineReadonly(state) : state;
   createProvider && provide(key, native ? context : provideData);
 
