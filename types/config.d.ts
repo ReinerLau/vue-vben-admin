@@ -1,12 +1,12 @@
-import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '@/enums/menuEnum';
 import {
   ContentEnum,
   PermissionModeEnum,
-  ThemeEnum,
   RouterTransitionEnum,
-  SettingButtonPositionEnum,
   SessionTimeoutProcessingEnum,
+  SettingButtonPositionEnum,
+  ThemeEnum,
 } from '@/enums/appEnum';
+import { MenuModeEnum, MenuTypeEnum, MixSidebarTriggerEnum, TriggerEnum } from '@/enums/menuEnum';
 
 import { CacheTypeEnum } from '@/enums/cacheEnum';
 
@@ -62,12 +62,19 @@ export interface HeaderSetting {
 }
 
 export interface LocaleSetting {
+  /**
+   * @description 是否显示语言切换组件
+   * @example 默认为 true 表示显示
+   */
   showPicker: boolean;
   // Current language
+  // TODO
   locale: LocaleType;
   // default language
+  // TODO
   fallback: LocaleType;
   // available Locales
+  // TODO
   availableLocales: LocaleType[];
 }
 
