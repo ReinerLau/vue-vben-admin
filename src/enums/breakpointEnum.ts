@@ -1,3 +1,6 @@
+/**
+ * 尺寸枚举
+ */
 export enum sizeEnum {
   XS = 'XS',
   SM = 'SM',
