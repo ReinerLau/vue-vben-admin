@@ -7,6 +7,9 @@ export enum sizeEnum {
   XXL = 'XXL',
 }
 
+/**
+ * 屏幕宽度枚举
+ */
 export enum screenEnum {
   XS = 320,
   SM = 640,
