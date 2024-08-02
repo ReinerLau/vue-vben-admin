@@ -1,13 +1,13 @@
-import { watch, unref } from 'vue';
-import { useI18n } from '@/hooks/web/useI18n';
-import { useTitle as usePageTitle } from '@vueuse/core';
 import { useGlobSetting } from '@/hooks/setting';
-import { useRouter } from 'vue-router';
-import { useLocaleStore } from '@/store/modules/locale';
+import { useI18n } from '@/hooks/web/useI18n';
 import { REDIRECT_NAME } from '@/router/constant';
+import { useLocaleStore } from '@/store/modules/locale';
+import { useTitle as usePageTitle } from '@vueuse/core';
+import { unref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 
 /**
- * Listening to page changes and dynamically changing site titles
+ * 监听页面变化，动态修改站点标题
  */
 export function useTitle() {
   const { title } = useGlobSetting();

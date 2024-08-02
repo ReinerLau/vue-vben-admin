@@ -38,6 +38,5 @@
       isDark.value ? darkTheme : {},
     ),
   );
-  // Listening to page changes and dynamically changing site titles
   useTitle();
 </script>
