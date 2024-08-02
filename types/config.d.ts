@@ -74,8 +74,9 @@ export interface LocaleSetting {
    * 当前语言
    */
   locale: LocaleType;
-  // default language
-  // TODO
+  /**
+   * 如果当前语言找不到对应的 key，则回退到备用语言
+   */
   fallback: LocaleType;
   // available Locales
   // TODO
