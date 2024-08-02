@@ -70,6 +70,11 @@
   const { prefixCls } = useDesign('login');
   const { t } = useI18n();
   const localeStore = useLocaleStore();
+  /**
+   * 是否显示语言切换组件
+   * @description 从国家化 store 中获取
+   * @example 默认为 true 表示显示
+   */
   const showLocale = localeStore.getShowPicker;
   const title = computed(() => globSetting?.title ?? '');
 </script>
