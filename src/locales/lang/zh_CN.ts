@@ -9,6 +9,7 @@ const modules = import.meta.glob('./zh-CN/**/*.{json,ts,js}', { eager: true });
 
 /**
  * 合并来自 antd 自带语言包和自定义语言包
+ * @tutorial https://antdv.com/docs/vue/i18n-cn#configprovider
  */
 export default {
   message: {
