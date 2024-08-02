@@ -5,7 +5,6 @@
 </template>
 <script lang="ts" setup>
   /**
-   * // [x]
    * @description 获取验证码倒计时按钮
    */
   import { useI18n } from '@/hooks/web/useI18n';

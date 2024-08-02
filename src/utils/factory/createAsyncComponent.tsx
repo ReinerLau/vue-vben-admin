@@ -1,12 +1,11 @@
+import { noop } from '@/utils';
+import { Spin } from 'ant-design-vue';
 import {
   AsyncComponentLoader,
   Component,
   ComponentPublicInstance,
   defineAsyncComponent,
-  // FunctionalComponent, CSSProperties
 } from 'vue';
-import { Spin } from 'ant-design-vue';
-import { noop } from '@/utils';
 
 // const Loading: FunctionalComponent<{ size: 'small' | 'default' | 'large' }> = (props) => {
 //   const style: CSSProperties = {
@@ -41,7 +40,6 @@ export function createAsyncComponent<
     loadingComponent: loading ? <Spin spinning={true} size={size} /> : undefined,
     // The error component will be displayed if a timeout is
     // provided and exceeded. Default: Infinity.
-    // TODO
     timeout,
     // errorComponent
     // Defining if component is suspensible. Default: true.

@@ -1,10 +1,10 @@
-import type { BasicTableProps, TableRowSelection, BasicColumn } from '../types/table';
-import { Ref, ComputedRef, ref, computed, unref, nextTick, watch } from 'vue';
+import { useModalContext } from '@/components/Modal';
 import { getViewportOffset } from '@/utils/domUtils';
 import { isBoolean } from '@/utils/is';
-import { useWindowSizeFn, onMountedOrActivated } from '@vben/hooks';
-import { useModalContext } from '@/components/Modal';
-import { useDebounceFn, promiseTimeout } from '@vueuse/core';
+import { onMountedOrActivated, useWindowSizeFn } from '@vben/hooks';
+import { promiseTimeout, useDebounceFn } from '@vueuse/core';
+import { computed, ComputedRef, nextTick, Ref, ref, unref, watch } from 'vue';
+import type { BasicColumn, BasicTableProps, TableRowSelection } from '../types/table';
 
 import {
   footerHeight as layoutFooterHeight,
@@ -328,7 +328,6 @@ export function useTableScroll(
       width += 60;
     }
 
-    // TODO props ?? 0;
     const NORMAL_WIDTH = 150;
 
     const columns = unref(columnsRef).filter((item) => !item.defaultHidden);

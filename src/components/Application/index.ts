@@ -1,5 +1,4 @@
 /**
- * // [x]
  * @description 提供应用层级公共组件和上下文 hook 的入口文件
  */
 import { withInstall } from '@/utils';

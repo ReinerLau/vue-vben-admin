@@ -1,29 +1,29 @@
 <script lang="tsx">
-  import { type Recordable, type Nullable } from '@vben/types';
+  import { BasicHelp, BasicTitle } from '@/components/Basic';
+  import type { TableActionType } from '@/components/Table';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { getSlot } from '@/utils/helper/tsxHelper';
+  import { isBoolean, isFunction, isNull } from '@/utils/is';
+  import { type Nullable, type Recordable } from '@vben/types';
+  import { Col, Divider, Form } from 'ant-design-vue';
+  import type { Rule as ValidationRule } from 'ant-design-vue/lib/form/interface';
+  import { cloneDeep, upperFirst } from 'lodash-es';
   import type { PropType, Ref } from 'vue';
   import { computed, defineComponent, toRefs, unref } from 'vue';
-  import {
-    isComponentFormSchema,
-    type FormActionType,
-    type FormProps,
-    type FormSchemaInner as FormSchema,
-  } from '../types/form';
-  import type { Rule as ValidationRule } from 'ant-design-vue/lib/form/interface';
-  import type { TableActionType } from '@/components/Table';
-  import { Col, Divider, Form } from 'ant-design-vue';
   import { componentMap } from '../componentMap';
-  import { BasicHelp, BasicTitle } from '@/components/Basic';
-  import { isBoolean, isFunction, isNull } from '@/utils/is';
-  import { getSlot } from '@/utils/helper/tsxHelper';
   import {
     createPlaceholderMessage,
     isIncludeSimpleComponents,
     NO_AUTO_LINK_COMPONENTS,
     setComponentRuleType,
   } from '../helper';
-  import { cloneDeep, upperFirst } from 'lodash-es';
   import { useItemLabelWidth } from '../hooks/useLabelWidth';
-  import { useI18n } from '@/hooks/web/useI18n';
+  import {
+    isComponentFormSchema,
+    type FormActionType,
+    type FormProps,
+    type FormSchemaInner as FormSchema,
+  } from '../types/form';
 
   export default defineComponent({
     name: 'BasicFormItem',
@@ -409,7 +409,6 @@
 
           const showPrefix = !!prefix;
           const getPrefix = isFunction(prefix) ? prefix(unref(getValues)) : prefix;
-          // TODO 自定义组件验证会出现问题，因此这里框架默认将自定义组件设置手动触发验证，如果其他组件还有此问题请手动设置autoLink=false
           if (component && NO_AUTO_LINK_COMPONENTS.includes(component)) {
             props.schema &&
               (props.schema.itemProps! = {

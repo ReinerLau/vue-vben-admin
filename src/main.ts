@@ -1,5 +1,4 @@
 /**
- * // [x]
  * @description 入口文件
  */
 import '@/components/VxeTable/src/css/index.scss';

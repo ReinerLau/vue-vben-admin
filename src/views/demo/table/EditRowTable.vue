@@ -10,21 +10,21 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue';
-  import {
-    BasicTable,
-    useTable,
-    TableAction,
-    BasicColumn,
-    ActionItem,
-    EditRecordRow,
-  } from '@/components/Table';
   import { optionsListApi } from '@/api/demo/select';
+  import {
+    ActionItem,
+    BasicColumn,
+    BasicTable,
+    EditRecordRow,
+    TableAction,
+    useTable,
+  } from '@/components/Table';
+  import { ref } from 'vue';
 
   import { demoListApi } from '@/api/demo/table';
   import { treeOptionsListApi } from '@/api/demo/tree';
-  import { cloneDeep } from 'lodash-es';
   import { useMessage } from '@/hooks/web/useMessage';
+  import { cloneDeep } from 'lodash-es';
 
   const columns: BasicColumn[] = [
     {
@@ -259,7 +259,6 @@
       try {
         const data = cloneDeep(record.editValueRefs);
         console.log(data);
-        //TODO 此处将数据提交给服务器保存
         // ...
         // 保存之后提交编辑状态
         const pass = await record.onEdit?.(false, true);

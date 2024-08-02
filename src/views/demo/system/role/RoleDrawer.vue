@@ -22,11 +22,11 @@
   </BasicDrawer>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '@/components/Form';
-  import { formSchema } from './role.data';
   import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
+  import { BasicForm, useForm } from '@/components/Form';
   import { BasicTree, TreeItem } from '@/components/Tree';
+  import { computed, ref, unref } from 'vue';
+  import { formSchema } from './role.data';
 
   import { getMenuList } from '@/api/demo/system';
 
@@ -63,7 +63,6 @@
     try {
       const values = await validate();
       setDrawerProps({ confirmLoading: true });
-      // TODO custom api
       console.log(values);
       closeDrawer();
       emit('success');

@@ -1,5 +1,4 @@
 /**
- * // [x]
  * @description: 提供各种工具函数
  */
 import type { App, Component } from 'vue';

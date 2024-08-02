@@ -1,5 +1,4 @@
 /**
- * // [x]
  * @description: i18n hook
  */
 import { i18n } from '@/locales/setupI18n';

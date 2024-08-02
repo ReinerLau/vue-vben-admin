@@ -10,8 +10,8 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { PageWrapper } from '@/components/Page';
   import { BasicForm, useForm } from '@/components/Form';
+  import { PageWrapper } from '@/components/Page';
 
   import { formSchema } from './pwd.data';
 
@@ -30,7 +30,6 @@
       const values = await validate();
       const { passwordOld, passwordNew } = values;
 
-      // TODO custom api
       console.log(passwordOld, passwordNew);
       // const { router } = useRouter();
       // router.push(pageEnum.BASE_LOGIN);

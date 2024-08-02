@@ -52,7 +52,6 @@ function convertFlowElementToNode(element) {
 
 export function toLogicFlowData(data) {
   const lfData: {
-    // TODO type
     nodes: any[];
     edges: any[];
   } = {

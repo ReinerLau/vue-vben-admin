@@ -1,5 +1,4 @@
 /**
- * // [x]
  * @description i18n configuration
  */
 import type { App } from 'vue';

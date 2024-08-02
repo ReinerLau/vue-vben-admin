@@ -4,11 +4,11 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from 'vue';
-  import { BasicModal, useModalInner } from '@/components/Modal';
-  import { BasicForm, useForm } from '@/components/Form';
-  import { accountFormSchema } from './account.data';
   import { getDeptList } from '@/api/demo/system';
+  import { BasicForm, useForm } from '@/components/Form';
+  import { BasicModal, useModalInner } from '@/components/Modal';
+  import { computed, ref, unref } from 'vue';
+  import { accountFormSchema } from './account.data';
 
   defineOptions({ name: 'AccountModal' });
 
@@ -58,7 +58,6 @@
     try {
       const values = await validate();
       setModalProps({ confirmLoading: true });
-      // TODO custom api
       console.log(values);
       closeModal();
       emit('success', { isUpdate: unref(isUpdate), values: { ...values, id: rowId.value } });

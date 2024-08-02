@@ -38,33 +38,33 @@
   </Form>
 </template>
 <script lang="ts" setup>
+  import type { Ref } from 'vue';
   import type { FormActionType, FormProps, FormSchemaInner as FormSchema } from './types/form';
   import type { AdvanceState } from './types/hooks';
-  import type { Ref } from 'vue';
 
-  import { reactive, ref, computed, unref, onMounted, watch, nextTick, useAttrs } from 'vue';
   import { Form, Row, type FormProps as AntFormProps } from 'ant-design-vue';
-  import FormItem from './components/FormItem.vue';
+  import { computed, nextTick, onMounted, reactive, ref, unref, useAttrs, watch } from 'vue';
   import FormAction from './components/FormAction.vue';
+  import FormItem from './components/FormItem.vue';
 
-  import { dateItemType, isIncludeSimpleComponents } from './helper';
   import { dateUtil } from '@/utils/dateUtil';
+  import { dateItemType, isIncludeSimpleComponents } from './helper';
 
   import { deepMerge } from '@/utils';
 
-  import { useFormValues } from './hooks/useFormValues';
-  import useAdvanced from './hooks/useAdvanced';
-  import { itemIsUploadComponent, useFormEvents } from './hooks/useFormEvents';
-  import { createFormContext } from './hooks/useFormContext';
-  import { useAutoFocus } from './hooks/useAutoFocus';
   import { useModalContext } from '@/components/Modal';
   import { useDebounceFn } from '@vueuse/core';
+  import useAdvanced from './hooks/useAdvanced';
+  import { useAutoFocus } from './hooks/useAutoFocus';
+  import { createFormContext } from './hooks/useFormContext';
+  import { itemIsUploadComponent, useFormEvents } from './hooks/useFormEvents';
+  import { useFormValues } from './hooks/useFormValues';
 
-  import { basicProps } from './props';
-  import { useDesign } from '@/hooks/web/useDesign';
-  import { cloneDeep } from 'lodash-es';
   import { TableActionType } from '@/components/Table';
+  import { useDesign } from '@/hooks/web/useDesign';
   import { isArray, isFunction } from '@/utils/is';
+  import { cloneDeep } from 'lodash-es';
+  import { basicProps } from './props';
 
   defineOptions({ name: 'BasicForm' });
 
@@ -297,7 +297,6 @@
   function setFormModel(key: string, value: any, schema: FormSchema) {
     formModel[key] = value;
     emit('field-value-change', key, value);
-    // TODO 优化验证，这里如果是autoLink=false手动关联的情况下才会再次触发此函数
     if (schema && schema.itemProps && !schema.itemProps.autoLink) {
       validateFields([key]).catch((_) => {});
     }

@@ -1,5 +1,4 @@
 /**
- * // [x]
  * @description 存放了各种用于校验的工具函数
  */
 export {
