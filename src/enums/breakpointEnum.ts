@@ -22,6 +22,11 @@ export enum screenEnum {
   XXL = 1536,
 }
 
+/**
+ * 尺寸与屏幕宽度的映射
+ * @description key 为尺寸
+ * @description value 为屏幕宽度
+ */
 const screenMap = new Map<sizeEnum, number>();
 
 screenMap.set(sizeEnum.XS, screenEnum.XS);
