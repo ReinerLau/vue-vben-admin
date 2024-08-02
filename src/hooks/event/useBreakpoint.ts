@@ -31,10 +31,18 @@ export function useBreakpoint() {
 // TODO
 // Just call it once
 export function createBreakpointListen(fn?: (opt: CreateCallbackParams) => void) {
+  /**
+   * 尺寸
+   */
   const screenRef = ref<sizeEnum>(sizeEnum.XL);
+  /**
+   * 屏幕宽度
+   */
   const realWidthRef = ref(window.innerWidth);
 
-  // TODO
+  /**
+   * 获取尺寸和屏幕宽度
+   */
   function getWindowWidth() {
     const width = document.body.clientWidth;
     const xs = screenMap.get(sizeEnum.XS)!;
