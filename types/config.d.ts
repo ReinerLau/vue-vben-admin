@@ -10,6 +10,9 @@ import { MenuModeEnum, MenuTypeEnum, MixSidebarTriggerEnum, TriggerEnum } from '
 
 import { CacheTypeEnum } from '@/enums/cacheEnum';
 
+/**
+ * 语言种类
+ */
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
 
 export interface MenuSetting {
