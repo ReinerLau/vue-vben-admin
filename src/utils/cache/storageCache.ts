@@ -102,6 +102,7 @@ export const createStorage = ({
      * @description 读取缓存
      */
     get(key: string, def: any = null): any {
+      // TODO: 缓存什么时候设置的？
       const val = this.storage.getItem(this.getKey(key));
       if (!val) return def;
 
