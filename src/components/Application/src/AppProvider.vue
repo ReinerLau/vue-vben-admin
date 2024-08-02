@@ -1,14 +1,15 @@
 <script lang="ts">
-  import { defineComponent, toRefs, ref, unref } from 'vue';
-  import { createAppProviderContext } from './useAppContext';
+  import { MenuModeEnum, MenuTypeEnum } from '@/enums/menuEnum';
   import { createBreakpointListen } from '@/hooks/event/useBreakpoint';
   import { prefixCls } from '@/settings/designSetting';
   import { useAppStore } from '@/store/modules/app';
-  import { MenuModeEnum, MenuTypeEnum } from '@/enums/menuEnum';
+  import { defineComponent, ref, toRefs, unref } from 'vue';
+  import { createAppProviderContext } from './useAppContext';
 
   const props = {
     /**
-     * class style prefix
+     * 类名前缀
+     * @example 默认为 vben
      */
     prefixCls: { type: String, default: prefixCls },
   };
@@ -76,6 +77,9 @@
           }
         }
       }
+      /**
+       * @tutorial https://cn.vuejs.org/guide/extras/render-function.html#rendering-slots
+       */
       return () => slots.default?.();
     },
   });
