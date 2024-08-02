@@ -12,6 +12,7 @@ import appSearch from './src/search/AppSearch.vue';
 export { useAppProviderContext } from './src/useAppContext';
 
 export const AppLogo = withInstall(appLogo);
+// TODO
 export const AppProvider = withInstall(appProvider);
 export const AppSearch = withInstall(appSearch);
 export const AppLocalePicker = withInstall(appLocalePicker);
