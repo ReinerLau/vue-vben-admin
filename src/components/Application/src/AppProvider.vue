@@ -19,6 +19,7 @@
     inheritAttrs: false,
     props,
     setup(props, { slots }) {
+      // TODO
       const isMobile = ref(false);
       const isSetState = ref(false);
 
@@ -35,7 +36,6 @@
 
       const { prefixCls } = toRefs(props);
 
-      // Inject variables into the global
       createAppProviderContext({ prefixCls, isMobile });
 
       /**
