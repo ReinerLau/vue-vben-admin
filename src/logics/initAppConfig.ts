@@ -60,7 +60,9 @@ export function initAppConfigStore() {
     headerBgColor && updateHeaderBgColor(headerBgColor);
     bgColor && updateSidebarBgColor(bgColor);
   }
-  // init store
+  /**
+   * 初始化国际化配置并缓存
+   */
   localeStore.initLocale();
 
   setTimeout(() => {

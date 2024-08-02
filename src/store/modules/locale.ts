@@ -20,6 +20,9 @@ const ls = createLocalStorage();
 const lsLocaleSetting = (ls.get(LOCALE_KEY) || localeSetting) as LocaleSetting;
 
 interface LocaleState {
+  /**
+   * 当前国际化配置
+   */
   localInfo: LocaleSetting;
 }
 
@@ -49,15 +52,15 @@ export const useLocaleStore = defineStore({
   },
   actions: {
     /**
-     * Set up multilingual information and cache
-     * @param info multilingual info
+     * 设置国际化配置并缓存
+     * @param info 新的国际化配置
      */
     setLocaleInfo(info: Partial<LocaleSetting>) {
       this.localInfo = { ...this.localInfo, ...info };
       ls.set(LOCALE_KEY, this.localInfo);
     },
     /**
-     * Initialize multilingual information and load the existing configuration from the local cache
+     * 初始化国际化配置，合并默认配置和缓存中的配置
      */
     initLocale() {
       this.setLocaleInfo({
