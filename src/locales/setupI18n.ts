@@ -25,6 +25,9 @@ async function createI18nOptions(): Promise<I18nOptions> {
    * 当前语言
    */
   const locale = localeStore.getLocale;
+  /**
+   * 根据当前语言动态导入对应的语言包
+   */
   const defaultLocal = await import(`./lang/${locale}.ts`);
   const message = defaultLocal.default?.message ?? {};
 
