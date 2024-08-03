@@ -43,9 +43,8 @@
 
       createAppProviderContext({ prefixCls, isMobile });
 
-      // TODO
       /**
-       * Used to maintain the state before the window changes
+       * PC和移动端切换后对菜单重新配置
        */
       function handleRestoreState() {
         if (unref(isMobile)) {
@@ -61,14 +60,12 @@
               },
             } = appStore.getProjectConfig;
             appStore.setProjectConfig({
-              // TODO
               menuSetting: {
                 type: MenuTypeEnum.SIDEBAR,
                 mode: MenuModeEnum.INLINE,
                 split: false,
               },
             });
-            // TODO
             appStore.setBeforeMiniInfo({ menuMode, menuCollapsed, menuType, menuSplit });
           }
         } else {
