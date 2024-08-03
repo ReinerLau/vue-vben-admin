@@ -12,7 +12,10 @@ import appSearch from './src/search/AppSearch.vue';
 export { useAppProviderContext } from './src/useAppContext';
 
 export const AppLogo = withInstall(appLogo);
-// TODO
+/**
+ * @description 提供应用层级上下文
+ * @description 监听窗口变化
+ */
 export const AppProvider = withInstall(appProvider);
 export const AppSearch = withInstall(appSearch);
 export const AppLocalePicker = withInstall(appLocalePicker);
