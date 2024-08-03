@@ -21,6 +21,9 @@ export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
 export interface MenuSetting {
   bgColor: string;
   fixed: boolean;
+  /**
+   * 菜单折叠
+   */
   collapsed: boolean;
   siderHidden: boolean;
   canDrag: boolean;
