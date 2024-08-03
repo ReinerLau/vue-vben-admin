@@ -25,10 +25,19 @@ export interface MenuSetting {
   siderHidden: boolean;
   canDrag: boolean;
   show: boolean;
+  /**
+   * 分割菜单
+   */
   hidden: boolean;
   split: boolean;
   menuWidth: number;
+  /**
+   * 菜单模式
+   */
   mode: MenuModeEnum;
+  /**
+   * 菜单类型
+   */
   type: MenuTypeEnum;
   theme: ThemeEnum;
   topMenuAlign: 'start' | 'center' | 'end';
