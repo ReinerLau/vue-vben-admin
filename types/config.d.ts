@@ -129,8 +129,9 @@ export interface ProjectConfig {
   showFooter: boolean;
   // menuType: MenuTypeEnum;
   headerSetting: HeaderSetting;
-  // menuSetting
-  // TODO
+  /**
+   * 菜单相关配置
+   */
   menuSetting: MenuSetting;
   // Multi-tab settings
   multiTabsSetting: MultiTabsSetting;
