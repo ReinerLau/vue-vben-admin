@@ -1,5 +1,5 @@
 /**
- * 菜单显示模式枚举
+ * 菜单类型枚举
  */
 export enum MenuTypeEnum {
   // left menu
@@ -24,7 +24,9 @@ export enum TriggerEnum {
 
 export type Mode = 'vertical' | 'vertical-right' | 'horizontal' | 'inline';
 
-// menu mode
+/**
+ * 菜单模式枚举
+ */
 export enum MenuModeEnum {
   VERTICAL = 'vertical',
   HORIZONTAL = 'horizontal',
