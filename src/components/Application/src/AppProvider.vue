@@ -19,16 +19,21 @@
     inheritAttrs: false,
     props,
     setup(props, { slots }) {
-      // TODO
+      /**
+       * 是否为移动端
+       */
       const isMobile = ref(false);
+      /**
+       * 是否已经设置了移动端下的状态
+       */
       const isSetState = ref(false);
 
       const appStore = useAppStore();
 
-      // Monitor screen breakpoint information changes
       createBreakpointListen(({ screenMap, sizeEnum, width }) => {
         const lgWidth = screenMap.get(sizeEnum.LG);
         if (lgWidth) {
+          // 当前屏幕宽度小于 lgWidth 时为移动端
           isMobile.value = width.value - 1 < lgWidth;
         }
         handleRestoreState();
@@ -38,11 +43,13 @@
 
       createAppProviderContext({ prefixCls, isMobile });
 
+      // TODO
       /**
        * Used to maintain the state before the window changes
        */
       function handleRestoreState() {
         if (unref(isMobile)) {
+          // 从PC切换到移动端
           if (!unref(isSetState)) {
             isSetState.value = true;
             const {
@@ -54,15 +61,18 @@
               },
             } = appStore.getProjectConfig;
             appStore.setProjectConfig({
+              // TODO
               menuSetting: {
                 type: MenuTypeEnum.SIDEBAR,
                 mode: MenuModeEnum.INLINE,
                 split: false,
               },
             });
+            // TODO
             appStore.setBeforeMiniInfo({ menuMode, menuCollapsed, menuType, menuSplit });
           }
         } else {
+          // 从移动端切换到PC
           if (unref(isSetState)) {
             isSetState.value = false;
             const { menuMode, menuCollapsed, menuType, menuSplit } = appStore.getBeforeMiniInfo;
