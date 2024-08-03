@@ -11,7 +11,7 @@ export enum sizeEnum {
 }
 
 /**
- * 屏幕宽度枚举
+ * 尺寸对应的最大屏幕宽度枚举
  */
 export enum screenEnum {
   XS = 320,
@@ -25,7 +25,7 @@ export enum screenEnum {
 /**
  * 尺寸与屏幕宽度的映射
  * @description key 为尺寸
- * @description value 为屏幕宽度
+ * @description value 为尺寸对应的最大屏幕宽度
  */
 const screenMap = new Map<sizeEnum, number>();
 
