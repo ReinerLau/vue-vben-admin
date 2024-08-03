@@ -15,6 +15,9 @@ import { CacheTypeEnum } from '@/enums/cacheEnum';
  */
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
 
+/**
+ * 菜单相关配置
+ */
 export interface MenuSetting {
   bgColor: string;
   fixed: boolean;
@@ -127,6 +130,7 @@ export interface ProjectConfig {
   // menuType: MenuTypeEnum;
   headerSetting: HeaderSetting;
   // menuSetting
+  // TODO
   menuSetting: MenuSetting;
   // Multi-tab settings
   multiTabsSetting: MultiTabsSetting;
