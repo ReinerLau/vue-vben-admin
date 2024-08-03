@@ -1,5 +1,5 @@
 /**
- * @description: menu type
+ * 菜单显示模式枚举
  */
 export enum MenuTypeEnum {
   // left menu
