@@ -1,6 +1,6 @@
+import { RoleInfo } from '@/api/sys/model/userModel';
 import { ErrorTypeEnum } from '@/enums/exceptionEnum';
 import { MenuModeEnum, MenuTypeEnum } from '@/enums/menuEnum';
-import { RoleInfo } from '@/api/sys/model/userModel';
 
 // Lock screen information
 export interface LockInfo {
@@ -45,10 +45,25 @@ export interface UserInfo {
   roles: RoleInfo[];
 }
 
+/**
+ * 切换到移动端前的菜单配置
+ */
 export interface BeforeMiniState {
+  /**
+   * 菜单折叠
+   */
   menuCollapsed?: boolean;
+  /**
+   * 分割菜单
+   */
   menuSplit?: boolean;
+  /**
+   * 菜单模式
+   */
   menuMode?: MenuModeEnum;
+  /**
+   * 菜单类型
+   */
   menuType?: MenuTypeEnum;
 }
 
