@@ -6,7 +6,9 @@ export interface AppProviderContextProps {
    * 全局类名前缀
    */
   prefixCls: Ref<string>;
-  // TODO
+  /**
+   * 是否为移动端
+   */
   isMobile: Ref<boolean>;
 }
 
