@@ -28,7 +28,9 @@ interface AppState {
    * @description 项目配置
    */
   projectConfig: ProjectConfig | null;
-  // When the window shrinks, remember some states, and restore these states when the window is restored
+  /**
+   * 切换到移动端前的菜单配置
+   */
   beforeMiniInfo: BeforeMiniState;
 }
 let timeId: TimeoutHandle;
@@ -57,11 +59,15 @@ export const useAppStore = defineStore({
     getDarkMode(state): 'light' | 'dark' | string {
       return state.darkMode || localStorage.getItem(APP_DARK_MODE_KEY) || darkMode;
     },
-
+    /**
+     * 获取切换到移动端前的菜单配置
+     */
     getBeforeMiniInfo(state): BeforeMiniState {
       return state.beforeMiniInfo;
     },
-
+    /**
+     * 从内存中获取项目配置
+     */
     getProjectConfig(state): ProjectConfig {
       return state.projectConfig || ({} as ProjectConfig);
     },
@@ -91,12 +97,15 @@ export const useAppStore = defineStore({
       this.darkMode = mode;
       localStorage.setItem(APP_DARK_MODE_KEY, mode);
     },
-
+    /**
+     * 缓存切换到移动端前的菜单配置
+     * @param state 切换到移动端前的菜单配置
+     */
     setBeforeMiniInfo(state: BeforeMiniState): void {
       this.beforeMiniInfo = state;
     },
     /**
-     * @description 缓存新的项目配置
+     * @description 缓存新的项目配置到内存中
      * @param config 新的项目配置
      */
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
