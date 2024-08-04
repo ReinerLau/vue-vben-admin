@@ -1,6 +1,11 @@
 // Interface data format used to return a unified format
 import { ResultEnum } from '@/enums/httpEnum';
 
+/**
+ * 请求成功的返回结果
+ * @param result 响应结果
+ * @param param1.message 响应消息
+ */
 export function resultSuccess<T = Recordable>(result: T, { message = 'ok' } = {}) {
   return {
     code: ResultEnum.SUCCESS,
@@ -27,6 +32,11 @@ export function resultPageSuccess<T = any>(
   };
 }
 
+/**
+ * 请求错误的响应结果结果
+ * @param message 请求错误信息
+ * @param param1
+ */
 export function resultError(
   message = 'Request failed',
   { code = ResultEnum.ERROR, result = null } = {},
@@ -49,13 +59,20 @@ export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]
 export interface requestParams {
   method: string;
   body: any;
-  headers?: { authorization?: string };
+  /**
+   * 头信息
+   */
+  headers?: {
+    /**
+     * token
+     */
+    authorization?: string;
+  };
   query: any;
 }
 
 /**
- * @description 本函数用于从request数据中获取token，请根据项目的实际情况修改
- *
+ * 从请求数据中获取 token
  */
 export function getRequestToken({ headers }: requestParams): string | undefined {
   return headers?.authorization;

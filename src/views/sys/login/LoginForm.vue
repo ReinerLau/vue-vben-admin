@@ -82,29 +82,41 @@
   </Form>
 </template>
 <script lang="ts" setup>
-  import { reactive, ref, unref, computed } from 'vue';
+  import { computed, reactive, ref, unref } from 'vue';
 
-  import { Checkbox, Form, Input, Row, Col, Button, Divider } from 'ant-design-vue';
   import {
-    GithubFilled,
-    WechatFilled,
     AlipayCircleFilled,
+    GithubFilled,
     GoogleCircleFilled,
     TwitterCircleFilled,
+    WechatFilled,
   } from '@ant-design/icons-vue';
+  import { Button, Checkbox, Col, Divider, Form, Input, Row } from 'ant-design-vue';
   import LoginFormTitle from './LoginFormTitle.vue';
 
   import { useI18n } from '@/hooks/web/useI18n';
   import { useMessage } from '@/hooks/web/useMessage';
 
-  import { useUserStore } from '@/store/modules/user';
-  import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '@/hooks/web/useDesign';
+  import { useUserStore } from '@/store/modules/user';
+  import { LoginStateEnum, useFormRules, useFormValid, useLoginState } from './useLogin';
   //import { onKeyStroke } from '@vueuse/core';
 
+  /**
+   * antd Col 栅格组件
+   */
   const ACol = Col;
+  /**
+   * antd Row 栅格组件
+   */
   const ARow = Row;
+  /**
+   * antd 表单项组件
+   */
   const FormItem = Form.Item;
+  /**
+   * antd 密码输入框组件
+   */
   const InputPassword = Input.Password;
   const { t } = useI18n();
   const { notification, createErrorModal } = useMessage();
@@ -114,10 +126,22 @@
   const { setLoginState, getLoginState } = useLoginState();
   const { getFormRules } = useFormRules();
 
+  /**
+   * 表单组件实例
+   */
   const formRef = ref();
+  /**
+   * 登录按钮载入状态
+   */
   const loading = ref(false);
+  /**
+   * 是否记住我
+   */
   const rememberMe = ref(false);
 
+  /**
+   * 表单数据
+   */
   const formData = reactive({
     account: 'vben',
     password: '123456',
@@ -127,13 +151,20 @@
 
   //onKeyStroke('Enter', handleLogin);
 
+  /**
+   * 是否显示登录表单
+   */
   const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
+  /**
+   * 登录
+   */
   async function handleLogin() {
     const data = await validForm();
     if (!data) return;
     try {
       loading.value = true;
+      // TODO
       const userInfo = await userStore.login({
         password: data.password,
         username: data.account,

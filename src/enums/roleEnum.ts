@@ -1,7 +1,13 @@
+/**
+ * 角色枚举
+ */
 export enum RoleEnum {
-  // super admin
+  /**
+   * 超级管理员
+   */
   SUPER = 'super',
-
-  // tester
+  /**
+   * 测试账号
+   */
   TEST = 'test',
 }

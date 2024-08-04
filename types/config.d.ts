@@ -112,7 +112,9 @@ export interface TransitionSetting {
 }
 
 export interface ProjectConfig {
-  // Storage location of permission related information
+  /**
+   * 权限相关数据的缓存方式
+   */
   permissionCacheType: CacheTypeEnum;
   // Whether to show the configuration button
   showSettingButton: boolean;
@@ -120,7 +122,9 @@ export interface ProjectConfig {
   showDarkModeToggle: boolean;
   // Configure where the button is displayed
   settingButtonPosition: SettingButtonPositionEnum;
-  // Permission mode
+  /**
+   * 权限模式
+   */
   permissionMode: PermissionModeEnum;
   // Session timeout processing
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
@@ -170,7 +174,9 @@ export interface ProjectConfig {
 }
 
 export interface GlobConfig {
-  // Site title
+  /**
+   * 网站标题
+   */
   title: string;
   // Service interface url
   apiUrl: string;

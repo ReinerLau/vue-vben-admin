@@ -1,23 +1,23 @@
-import type { LockInfo, UserInfo, TableSetting } from '#/store';
 import type { ProjectConfig } from '#/config';
+import type { LockInfo, TableSetting, UserInfo } from '#/store';
 import type { RouteLocationNormalized } from 'vue-router';
 
-import { createLocalStorage, createSessionStorage } from '@/utils/cache';
-import { Memory } from './memory';
 import {
-  TOKEN_KEY,
-  USER_INFO_KEY,
-  ROLES_KEY,
-  LOCK_INFO_KEY,
-  PROJ_CFG_KEY,
   APP_LOCAL_CACHE_KEY,
   APP_SESSION_CACHE_KEY,
+  LOCK_INFO_KEY,
   MULTIPLE_TABS_KEY,
+  PROJ_CFG_KEY,
+  ROLES_KEY,
   TABLE_SETTING_KEY,
+  TOKEN_KEY,
+  USER_INFO_KEY,
 } from '@/enums/cacheEnum';
 import { DEFAULT_CACHE_TIME } from '@/settings/encryptionSetting';
+import { createLocalStorage, createSessionStorage } from '@/utils/cache';
+import { omit, pick } from 'lodash-es';
 import { toRaw } from 'vue';
-import { pick, omit } from 'lodash-es';
+import { Memory } from './memory';
 
 interface BasicStore {
   [TOKEN_KEY]: string | number | null | undefined;
@@ -38,12 +38,19 @@ type LocalKeys = keyof LocalStore;
 type SessionKeys = keyof SessionStore;
 
 const ls = createLocalStorage();
+/**
+ * 基于 sessionStorage 的缓存控制实例
+ */
 const ss = createSessionStorage();
 
 /**
- * @description 内存缓存控制实例
+ * 内存缓存控制实例
  */
 const localMemory = new Memory(DEFAULT_CACHE_TIME);
+/**
+ * 内存缓存控制实例
+ * @description 这部分内存中的数据可能会缓存到 seesionStorage 中
+ */
 const sessionMemory = new Memory(DEFAULT_CACHE_TIME);
 
 function initPersistentMemory() {
@@ -85,11 +92,19 @@ export class Persistent {
     localMemory.clear();
     immediate && ls.clear();
   }
-
+  /**
+   * 从内存中获取缓存值
+   * @param key 缓存 key
+   */
   static getSession<T>(key: SessionKeys) {
     return sessionMemory.get(key)?.value as Nullable<T>;
   }
-
+  /**
+   * 设置 sessionStorage 缓存
+   * @param key 缓存 key
+   * @param value 缓存值
+   * @param immediate 内存缓存是否与 sessionStorage 同步
+   */
   static setSession(key: SessionKeys, value: SessionStore[SessionKeys], immediate = false): void {
     sessionMemory.set(key, toRaw(value));
     immediate && ss.set(APP_SESSION_CACHE_KEY, sessionMemory.getCache);

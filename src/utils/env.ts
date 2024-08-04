@@ -42,11 +42,7 @@ const getVariableName = (title: string) => {
 };
 
 /**
- * @description 获取环境变量配置
- * @returns result.VITE_GLOB_APP_TITLE 网站标题
- * @returns result.VITE_GLOB_API_URL 接口地址
- * @returns result.VITE_GLOB_API_URL_PREFIX 接口地址前缀
- * @returns result.VITE_GLOB_UPLOAD_URL 文件上传接口地址
+ * 获取环境变量配置
  */
 export function getAppEnvConfig() {
   /**
@@ -86,9 +82,21 @@ export function getAppEnvConfig() {
   }
 
   return {
+    /**
+     * 网站标题
+     */
     VITE_GLOB_APP_TITLE,
+    /**
+     * 接口地址
+     */
     VITE_GLOB_API_URL,
+    /**
+     * 接口地址前缀
+     */
     VITE_GLOB_API_URL_PREFIX,
+    /**
+     * 文件上传接口地址
+     */
     VITE_GLOB_UPLOAD_URL,
   };
 }

@@ -13,7 +13,9 @@ declare module 'vue-router' {
     realPath?: string;
     // Whether to ignore permissions
     ignoreAuth?: boolean;
-    // role info
+    /**
+     * 拥有该路由权限的角色列表
+     */
     roles?: RoleEnum[];
     // Whether not to cache
     ignoreKeepAlive?: boolean;

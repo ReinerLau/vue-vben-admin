@@ -1,11 +1,17 @@
 import { defHttp } from '@/utils/http/axios';
-import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/userModel';
+import { GetUserInfoModel, LoginParams, LoginResultModel } from './model/userModel';
 
 import { ErrorMessageMode } from '#/axios';
 
+/**
+ * 接口地址枚举
+ */
 enum Api {
   Login = '/login',
   Logout = '/logout',
+  /**
+   * 获取用户信息接口地址
+   */
   GetUserInfo = '/getUserInfo',
   GetPermCode = '/getPermCode',
   TestRetry = '/testRetry',
@@ -27,7 +33,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
 }
 
 /**
- * @description: getUserInfo
+ * 获取用户数据接口
  */
 export function getUserInfo() {
   return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: 'none' });

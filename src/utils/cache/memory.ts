@@ -12,7 +12,7 @@ const NOT_ALIVE = 0;
  */
 export class Memory<T = any, V = any> {
   /**
-   * 缓存对象
+   * 内存缓存
    */
   private cache: { [key in keyof T]?: Cache<V> } = {};
   /**
@@ -24,7 +24,9 @@ export class Memory<T = any, V = any> {
     // Unit second
     this.alive = alive * 1000;
   }
-
+  /**
+   * 获取内存缓存
+   */
   get getCache() {
     return this.cache;
   }

@@ -1,6 +1,9 @@
 import { MockMethod } from 'vite-plugin-mock';
-import { resultError, resultSuccess, getRequestToken, requestParams } from '../_util';
+import { getRequestToken, requestParams, resultError, resultSuccess } from '../_util';
 
+/**
+ * 创建假的用户列表数据
+ */
 export function createFakeUserList() {
   return [
     {
@@ -74,6 +77,9 @@ export default [
     response: (request: requestParams) => {
       const token = getRequestToken(request);
       if (!token) return resultError('Invalid token');
+      /**
+       * 和请求数据 token 相同的用户数据
+       */
       const checkUser = createFakeUserList().find((item) => item.token === token);
       if (!checkUser) {
         return resultError('The corresponding user information was not obtained!');

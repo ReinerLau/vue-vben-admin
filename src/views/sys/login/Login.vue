@@ -61,21 +61,33 @@
   import RegisterForm from './RegisterForm.vue';
 
   defineProps({
+    /**
+     * 是否是会话超时
+     * @description SessionTimeoutLogin.vue 用到
+     * @example 默认为 false
+     */
     sessionTimeout: {
       type: Boolean,
     },
   });
 
+  /**
+   * 全局配置
+   */
   const globSetting = useGlobSetting();
   const { prefixCls } = useDesign('login');
   const { t } = useI18n();
+  /**
+   * 国际化配置 store
+   */
   const localeStore = useLocaleStore();
   /**
    * 是否显示语言切换组件
-   * @description 从国家化 store 中获取
-   * @example 默认为 true 表示显示
    */
   const showLocale = localeStore.getShowPicker;
+  /**
+   * 网站标题
+   */
   const title = computed(() => globSetting?.title ?? '');
 </script>
 <style lang="less">

@@ -2,6 +2,9 @@ import type { GlobConfig } from '#/config';
 
 import { getAppEnvConfig } from '@/utils/env';
 
+/**
+ * 读取环境变量中的配置作为全局配置
+ */
 export const useGlobSetting = (): Readonly<GlobConfig> => {
   const { VITE_GLOB_APP_TITLE, VITE_GLOB_API_URL, VITE_GLOB_API_URL_PREFIX, VITE_GLOB_UPLOAD_URL } =
     getAppEnvConfig();

@@ -23,13 +23,18 @@ const createOptions = (storage: Storage, options: Options = {}): Options => {
 export const WebStorage = create(createOptions(sessionStorage));
 
 /**
- * @description 创建控制缓存对象
- * @description 默认用 sessionStorage
+ * 创建控制缓存对象
+ * @param storage 缓存方式
+ * @param options 配置选项
+ * @description 默认使用 sessionStorage 缓存
  */
 export const createStorage = (storage: Storage = sessionStorage, options: Options = {}) => {
   return create(createOptions(storage, options));
 };
-
+/**
+ * 创建基于 sessionStorage 的缓存控制实例
+ * @param options 配置选项
+ */
 export const createSessionStorage = (options: Options = {}) => {
   return createStorage(sessionStorage, { ...options, timeout: DEFAULT_CACHE_TIME });
 };

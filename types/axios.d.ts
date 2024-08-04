@@ -1,3 +1,6 @@
+/**
+ * 错误提示类型
+ */
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
 export type SuccessMessageMode = ErrorMessageMode;
 
@@ -17,7 +20,9 @@ export interface RequestOptions {
   apiUrl?: string;
   // 请求拼接路径
   urlPrefix?: string;
-  // Error message prompt type
+  /**
+   * 错误提示类型
+   */
   errorMessageMode?: ErrorMessageMode;
   // Success message prompt type
   successMessageMode?: SuccessMessageMode;

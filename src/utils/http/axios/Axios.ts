@@ -1,23 +1,23 @@
+import type { RequestOptions, Result, UploadFileParams } from '#/axios';
+import { ContentTypeEnum, RequestEnum } from '@/enums/httpEnum';
+import { isFunction } from '@/utils/is';
 import type {
-  AxiosRequestConfig,
-  AxiosInstance,
-  AxiosResponse,
   AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
-import type { RequestOptions, Result, UploadFileParams } from '#/axios';
-import type { CreateAxiosOptions } from './axiosTransform';
 import axios from 'axios';
+import { cloneDeep } from 'lodash-es';
 import qs from 'qs';
 import { AxiosCanceler } from './axiosCancel';
-import { isFunction } from '@/utils/is';
-import { cloneDeep } from 'lodash-es';
-import { ContentTypeEnum, RequestEnum } from '@/enums/httpEnum';
+import type { CreateAxiosOptions } from './axiosTransform';
 
 export * from './axiosTransform';
 
 /**
- * @description:  axios module
+ * 封装好的 axios 类
  */
 export class VAxios {
   private axiosInstance: AxiosInstance;
@@ -181,6 +181,12 @@ export class VAxios {
     };
   }
 
+  /**
+   * 发起 get 请求
+   * @param config axios 原生请求配置
+   * @param options 自定义配置
+   * @returns
+   */
   get<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     return this.request({ ...config, method: 'GET' }, options);
   }
@@ -196,7 +202,11 @@ export class VAxios {
   delete<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     return this.request({ ...config, method: 'DELETE' }, options);
   }
-
+  /**
+   * 发起请求
+   * @param config axios 原生配置
+   * @param options 自定义配置
+   */
   request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     let conf: CreateAxiosOptions = cloneDeep(config);
     // cancelToken 如果被深拷贝，会导致最外层无法使用cancel方法来取消请求

@@ -27,7 +27,6 @@ export function createAppProviderContext(context: AppProviderContextProps) {
 
 /**
  * 获取来自 AppProvider 组件的上下文
- * @returns AppProvider 组件提供的上下文
  */
 export function useAppProviderContext() {
   return useContext<AppProviderContextProps>(key);

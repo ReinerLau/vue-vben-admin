@@ -123,7 +123,7 @@ export function findPathAll(tree: any, func: Fn, config: Partial<TreeHelperConfi
   }
   return result;
 }
-
+// TODO
 export function filter<T = any>(
   tree: T[],
   func: (n: T) => boolean,

@@ -1,13 +1,19 @@
-import type { AppRouteRecordRaw, AppRouteModule } from '@/router/types';
+import type { AppRouteModule, AppRouteRecordRaw } from '@/router/types';
 
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '@/router/routes/basic';
 
-import { mainOutRoutes } from './mainOut';
 import { PageEnum } from '@/enums/pageEnum';
 import { t } from '@/hooks/web/useI18n';
+import { mainOutRoutes } from './mainOut';
 
-// import.meta.glob() 直接引入所有的模块 Vite 独有的功能
+/**
+ * 从 ./modules 下引入的所有路由模块
+ * @tutorial https://cn.vitejs.dev/guide/features.html#glob-import
+ */
 const modules = import.meta.glob('./modules/**/*.ts', { eager: true });
+/**
+ * 路由模块列表
+ */
 const routeModuleList: AppRouteModule[] = [];
 
 // 加入到路由集合中
@@ -16,7 +22,9 @@ Object.keys(modules).forEach((key) => {
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   routeModuleList.push(...modList);
 });
-
+/**
+ * 需要动态新增的路由
+ */
 export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
 
 // 根路由

@@ -1,13 +1,13 @@
 import type { AppRouteRecordRaw, Menu } from '@/router/types';
 
-import { defineStore } from 'pinia';
-import { store } from '@/store';
 import { useI18n } from '@/hooks/web/useI18n';
-import { useUserStore } from './user';
-import { useAppStoreWithOut } from './app';
-import { toRaw } from 'vue';
-import { transformObjToRoute, flatMultiLevelRoutes } from '@/router/helper/routeHelper';
 import { transformRouteToMenu } from '@/router/helper/menuHelper';
+import { flatMultiLevelRoutes, transformObjToRoute } from '@/router/helper/routeHelper';
+import { store } from '@/store';
+import { defineStore } from 'pinia';
+import { toRaw } from 'vue';
+import { useAppStoreWithOut } from './app';
+import { useUserStore } from './user';
 
 import projectSetting from '@/settings/projectSetting';
 
@@ -21,15 +21,16 @@ import { filter } from '@/utils/helper/treeHelper';
 import { getMenuList } from '@/api/sys/menu';
 import { getPermCode } from '@/api/sys/user';
 
-import { useMessage } from '@/hooks/web/useMessage';
 import { PageEnum } from '@/enums/pageEnum';
+import { useMessage } from '@/hooks/web/useMessage';
 
 interface PermissionState {
   // Permission code list
   // 权限代码列表
   permCodeList: string[] | number[];
-  // Whether the route has been dynamically added
-  // 路由是否动态添加
+  /**
+   * 路由是否已动态添加
+   */
   isDynamicAddedRoute: boolean;
   // To trigger a menu update
   // 触发菜单更新
@@ -107,18 +108,26 @@ export const usePermissionStore = defineStore({
       const codeList = await getPermCode();
       this.setPermCodeList(codeList);
     },
-
+    // TODO
     // 构建路由
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
       const { t } = useI18n();
       const userStore = useUserStore();
       const appStore = useAppStoreWithOut();
-
+      /**
+       * 路由列表
+       */
       let routes: AppRouteRecordRaw[] = [];
+      /**
+       * 用户拥有的角色列表
+       */
       const roleList = toRaw(userStore.getRoleList) || [];
       const { permissionMode = projectSetting.permissionMode } = appStore.getProjectConfig;
 
-      // 路由过滤器 在 函数filter 作为回调传入遍历使用
+      /**
+       * 路由过滤器 在 函数filter 作为回调传入遍历使用
+       * @param route 路由项
+       */
       const routeFilter = (route: AppRouteRecordRaw) => {
         const { meta } = route;
         // 抽出角色
@@ -169,8 +178,8 @@ export const usePermissionStore = defineStore({
       };
 
       switch (permissionMode) {
-        // 角色权限
         case PermissionModeEnum.ROLE:
+          // TODO
           // 对非一级路由进行过滤
           routes = filter(asyncRoutes, routeFilter);
           // 对一级路由根据角色权限过滤

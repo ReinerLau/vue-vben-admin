@@ -1,9 +1,9 @@
-import type { ModalFuncProps } from 'ant-design-vue/lib/modal/Modal';
-import { Modal, message as Message, notification } from 'ant-design-vue';
-import { InfoCircleFilled, CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons-vue';
-import { NotificationArgsProps, ConfigProps } from 'ant-design-vue/lib/notification';
-import { useI18n } from './useI18n';
 import { isString } from '@/utils/is';
+import { CheckCircleFilled, CloseCircleFilled, InfoCircleFilled } from '@ant-design/icons-vue';
+import { message as Message, Modal, notification } from 'ant-design-vue';
+import type { ModalFuncProps } from 'ant-design-vue/lib/modal/Modal';
+import { ConfigProps, NotificationArgsProps } from 'ant-design-vue/lib/notification';
+import { useI18n } from './useI18n';
 
 export interface NotifyApi {
   info(config: NotificationArgsProps): void;
@@ -24,6 +24,10 @@ export interface ModalOptionsEx extends Omit<ModalFuncProps, 'iconType'> {
 }
 export type ModalOptionsPartial = Partial<ModalOptionsEx> & Pick<ModalOptionsEx, 'content'>;
 
+/**
+ * 生成图标
+ * @param iconType 图标类型
+ */
 function getIcon(iconType: string) {
   if (iconType === 'warning') {
     return <InfoCircleFilled class="modal-icon-warning" />;
@@ -35,7 +39,10 @@ function getIcon(iconType: string) {
     return <CloseCircleFilled class="modal-icon-error" />;
   }
 }
-
+/**
+ * 生成 antd Model 的内容
+ * @description content 有可能是 JSX
+ */
 function renderContent({ content }: Pick<ModalOptionsEx, 'content'>) {
   if (isString(content)) {
     return <div innerHTML={`<div>${content as string}</div>`}></div>;
@@ -58,7 +65,9 @@ function createConfirm(options: ModalOptionsEx) {
   };
   return Modal.confirm(opt);
 }
-
+/**
+ * 生成 antd Model 的基础配置
+ */
 const getBaseOptions = () => {
   const { t } = useI18n();
   return {
@@ -66,7 +75,11 @@ const getBaseOptions = () => {
     centered: true,
   };
 };
-
+/**
+ * 创建 antd Model 的配置
+ * @param options antd Model 配置
+ * @param icon 图标类型
+ */
 function createModalOptions(options: ModalOptionsPartial, icon: string): ModalOptionsPartial {
   return {
     ...getBaseOptions(),
@@ -98,14 +111,23 @@ notification.config({
 });
 
 /**
- * @description: message
+ * 提示消息相关 hook
  */
 export function useMessage() {
   return {
     createMessage: Message,
+    /**
+     * antd 的 notification 消息通知组件
+     * @description 进行过全局配置
+     * @tutorial https://antdv.com/components/notification-cn/#Notification-
+     */
     notification: notification as NotifyApi,
     createConfirm,
     createSuccessModal,
+    /**
+     * 弹出错误弹窗
+     * @param options antd Model 配置
+     */
     createErrorModal,
     createInfoModal,
     createWarningModal,
