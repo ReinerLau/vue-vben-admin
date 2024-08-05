@@ -41,6 +41,9 @@ export interface UserInfo {
   realName: string;
   avatar: string;
   desc?: string;
+  /**
+   * 主页路径
+   */
   homePath?: string;
   roles: RoleInfo[];
 }

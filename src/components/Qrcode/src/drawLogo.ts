@@ -1,6 +1,9 @@
 import { isString } from '@/utils/is';
-import { RenderQrCodeParams, LogoType } from './typing';
+import { LogoType, RenderQrCodeParams } from './typing';
 
+/**
+ * 在二维码中间画上 logo
+ */
 export const drawLogo = ({ canvas, logo }: RenderQrCodeParams) => {
   if (!logo) {
     return new Promise((resolve) => {

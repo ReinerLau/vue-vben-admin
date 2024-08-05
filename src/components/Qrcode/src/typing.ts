@@ -1,5 +1,8 @@
-import type { QRCodeSegment, QRCodeRenderersOptions } from 'qrcode';
+import type { QRCodeRenderersOptions, QRCodeSegment } from 'qrcode';
 
+/**
+ * 扫二维码后的内容
+ */
 export type ContentType = string | QRCodeSegment[];
 
 export type { QRCodeRenderersOptions };
@@ -16,10 +19,22 @@ export type LogoType = {
 };
 
 export interface RenderQrCodeParams {
+  /**
+   * 渲染二维码的元素
+   */
   canvas: any;
+  /**
+   * 扫二维码后的内容
+   */
   content: ContentType;
   width?: number;
+  /**
+   * qrcode 库的配置
+   */
   options?: QRCodeRenderersOptions;
+  /**
+   * 二维码中间图标
+   */
   logo?: LogoType | string;
   image?: HTMLImageElement;
   downloadName?: string;

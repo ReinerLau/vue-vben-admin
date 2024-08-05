@@ -31,21 +31,33 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { reactive, ref, computed, unref } from 'vue';
-  import { Form, Input, Button } from 'ant-design-vue';
   import { CountdownInput } from '@/components/CountDown';
-  import LoginFormTitle from './LoginFormTitle.vue';
   import { useI18n } from '@/hooks/web/useI18n';
-  import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
+  import { Button, Form, Input } from 'ant-design-vue';
+  import { computed, reactive, ref, unref } from 'vue';
+  import LoginFormTitle from './LoginFormTitle.vue';
+  import { LoginStateEnum, useFormRules, useFormValid, useLoginState } from './useLogin';
 
+  /**
+   * antd 表单项组件
+   */
   const FormItem = Form.Item;
   const { t } = useI18n();
   const { handleBackLogin, getLoginState } = useLoginState();
   const { getFormRules } = useFormRules();
 
+  /**
+   * 表单实例
+   */
   const formRef = ref();
+  /**
+   * 登录按钮载入状态
+   */
   const loading = ref(false);
 
+  /**
+   * 表单数据
+   */
   const formData = reactive({
     mobile: '',
     sms: '',
@@ -53,8 +65,14 @@
 
   const { validForm } = useFormValid(formRef);
 
+  /**
+   * 是否显示手机登录表单
+   */
   const getShow = computed(() => unref(getLoginState) === LoginStateEnum.MOBILE);
 
+  /**
+   * 登录
+   */
   async function handleLogin() {
     const data = await validForm();
     if (!data) return;

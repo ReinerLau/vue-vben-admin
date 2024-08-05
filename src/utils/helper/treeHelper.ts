@@ -1,17 +1,25 @@
 interface TreeHelperConfig {
   id: string;
+  /**
+   * 要过滤的子节点属性名
+   */
   children: string;
   pid: string;
 }
-
-// 默认配置
+/**
+ * 默认配置
+ */
 const DEFAULT_CONFIG: TreeHelperConfig = {
   id: 'id',
   children: 'children',
   pid: 'pid',
 };
 
-// 获取配置。  Object.assign 从一个或多个源对象复制到目标对象
+/**
+ * 获取配置
+ * @description Object.assign 从一个或多个源对象复制到目标对象
+ * @param config 新配置
+ */
 const getConfig = (config: Partial<TreeHelperConfig>) => Object.assign({}, DEFAULT_CONFIG, config);
 
 // tree from list
@@ -123,26 +131,50 @@ export function findPathAll(tree: any, func: Fn, config: Partial<TreeHelperConfi
   }
   return result;
 }
-// TODO
+/**
+ * 过滤树形数据结构
+ * @param tree 树形数据结构
+ * @param func 过滤回调
+ * @param config 配置
+ */
 export function filter<T = any>(
   tree: T[],
   func: (n: T) => boolean,
   // Partial 将 T 中的所有属性设为可选
   config: Partial<TreeHelperConfig> = {},
 ): T[] {
-  // 获取配置
+  /**
+   * 配置
+   */
   config = getConfig(config);
+  /**
+   * 子节点属性名
+   */
   const children = config.children as string;
 
+  /**
+   * 过滤树形数据
+   * @param list 树形数据结构
+   */
   function listFilter(list: T[]) {
     return list
-      .map((node: any) => ({ ...node }))
-      .filter((node) => {
-        // 递归调用 对含有children项  进行再次调用自身函数 listFilter
-        node[children] = node[children] && listFilter(node[children]);
-        // 执行传入的回调 func 进行过滤
-        return func(node) || (node[children] && node[children].length);
-      });
+      .map(
+        /**
+         * @param node 节点对象
+         */
+        (node: any) => ({ ...node }),
+      )
+      .filter(
+        /**
+         * @param node 节点对象
+         */
+        (node) => {
+          // 递归调用 对含有children项  进行再次调用自身函数 listFilter
+          node[children] = node[children] && listFilter(node[children]);
+          // 执行传入的回调 func 进行过滤
+          return func(node) || (node[children] && node[children].length);
+        },
+      );
   }
 
   return listFilter(tree);
@@ -164,24 +196,48 @@ export function forEach<T = any>(
     children && list[i][children] && list.splice(i + 1, 0, ...list[i][children]);
   }
 }
-
 /**
- * @description: Extract tree specified structure
- * @description: 提取树指定结构
+ * 提取树指定结构
+ * @param treeData 节点列表
+ * @param opt 配置项
  */
-export function treeMap<T = any>(treeData: T[], opt: { children?: string; conversion: Fn }): T[] {
+export function treeMap<T = any>(
+  treeData: T[],
+  opt: {
+    children?: string;
+    conversion: Fn;
+  },
+): T[] {
   return treeData.map((item) => treeMapEach(item, opt));
 }
-
 /**
- * @description: Extract tree specified structure
+ * 处理每个节点
  * @description: 提取树指定结构
+ * @param data 节点
  */
 export function treeMapEach(
   data: any,
-  { children = 'children', conversion }: { children?: string; conversion: Fn },
+  {
+    children = 'children',
+    conversion,
+  }: {
+    /**
+     * 子节点属性名
+     */
+    children?: string;
+    /**
+     * 转换函数
+     */
+    conversion: Fn;
+  },
 ) {
+  /**
+   * 是否有子节点
+   */
   const haveChildren = Array.isArray(data[children]) && data[children].length > 0;
+  /**
+   * 转换后的数据
+   */
   const conversionData = conversion(data) || {};
   if (haveChildren) {
     return {

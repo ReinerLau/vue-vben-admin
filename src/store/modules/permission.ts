@@ -56,8 +56,9 @@ export const usePermissionStore = defineStore({
     // Backstage menu list
     // 后台菜单列表
     backMenuList: [],
-    // menu List
-    // 菜单列表
+    /**
+     * 菜单列表
+     */
     frontMenuList: [],
   }),
   getters: {
@@ -86,7 +87,10 @@ export const usePermissionStore = defineStore({
       this.backMenuList = list;
       list?.length > 0 && this.setLastBuildMenuTime();
     },
-
+    /**
+     * 设置菜单列表到 store 中
+     * @param list 菜单列表
+     */
     setFrontMenuList(list: Menu[]) {
       this.frontMenuList = list;
     },
@@ -94,7 +98,9 @@ export const usePermissionStore = defineStore({
     setLastBuildMenuTime() {
       this.lastBuildMenuTime = new Date().getTime();
     },
-
+    /**
+     * 标记路由是否已添加
+     */
     setDynamicAddedRoute(added: boolean) {
       this.isDynamicAddedRoute = added;
     },
@@ -108,8 +114,9 @@ export const usePermissionStore = defineStore({
       const codeList = await getPermCode();
       this.setPermCodeList(codeList);
     },
-    // TODO
-    // 构建路由
+    /**
+     * 构建路由
+     */
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
       const { t } = useI18n();
       const userStore = useUserStore();
@@ -136,37 +143,56 @@ export const usePermissionStore = defineStore({
         // 进行角色权限判断
         return roleList.some((role) => roles.includes(role));
       };
-
+      /**
+       * 过滤掉仅用于菜单生成的路由
+       * @param route 路由
+       */
       const routeRemoveIgnoreFilter = (route: AppRouteRecordRaw) => {
         const { meta } = route;
-        // ignoreRoute 为true 则路由仅用于菜单生成，不会在实际的路由表中出现
+        // ignoreRoute 为 true 则路由仅用于菜单生成，不会在实际的路由表中出现
         const { ignoreRoute } = meta || {};
         // arr.filter 返回 true 表示该元素通过测试
         return !ignoreRoute;
       };
-
       /**
-       * @description 根据设置的首页path，修正routes中的affix标记（固定首页）
-       * */
+       * 根据设置的首页path，修正routes中的affix标记（固定首页）
+       * @param routes 路由列表
+       */
       const patchHomeAffix = (routes: AppRouteRecordRaw[]) => {
         if (!routes || routes.length === 0) return;
+        /**
+         * 主页路径
+         */
         let homePath: string = userStore.getUserInfo.homePath || PageEnum.BASE_HOME;
 
         function patcher(routes: AppRouteRecordRaw[], parentPath = '') {
           if (parentPath) parentPath = parentPath + '/';
-          routes.forEach((route: AppRouteRecordRaw) => {
-            const { path, children, redirect } = route;
-            const currentPath = path.startsWith('/') ? path : parentPath + path;
-            if (currentPath === homePath) {
-              if (redirect) {
-                homePath = route.redirect! as string;
-              } else {
-                route.meta = Object.assign({}, route.meta, { affix: true });
-                throw new Error('end');
+          routes.forEach(
+            /**
+             * @param route 路由
+             */
+            (route: AppRouteRecordRaw) => {
+              const { path, children, redirect } = route;
+              /**
+               * 当前路由完整路径
+               */
+              const currentPath = path.startsWith('/') ? path : parentPath + path;
+              if (currentPath === homePath) {
+                if (redirect) {
+                  homePath = route.redirect! as string;
+                } else {
+                  route.meta = Object.assign({}, route.meta, {
+                    /**
+                     * 是否固定在标签栏上
+                     */
+                    affix: true,
+                  });
+                  throw new Error('end');
+                }
               }
-            }
-            children && children.length > 0 && patcher(children, currentPath);
-          });
+              children && children.length > 0 && patcher(children, currentPath);
+            },
+          );
         }
 
         try {
@@ -179,12 +205,10 @@ export const usePermissionStore = defineStore({
 
       switch (permissionMode) {
         case PermissionModeEnum.ROLE:
-          // TODO
           // 对非一级路由进行过滤
           routes = filter(asyncRoutes, routeFilter);
           // 对一级路由根据角色权限过滤
           routes = routes.filter(routeFilter);
-          // Convert multi-level routing to level 2 routing
           // 将多级路由转换为 2 级路由
           routes = flatMultiLevelRoutes(routes);
           break;
@@ -195,7 +219,9 @@ export const usePermissionStore = defineStore({
           routes = filter(asyncRoutes, routeFilter);
           // 对一级路由再次根据角色权限过滤
           routes = routes.filter(routeFilter);
-          // 将路由转换成菜单
+          /**
+           * 菜单列表
+           */
           const menuList = transformRouteToMenu(routes, true);
           // 移除掉 ignoreRoute: true 的路由 非一级路由
           routes = filter(routes, routeRemoveIgnoreFilter);
@@ -205,12 +231,8 @@ export const usePermissionStore = defineStore({
           menuList.sort((a, b) => {
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0);
           });
-
-          // 设置菜单列表
           this.setFrontMenuList(menuList);
 
-          // Convert multi-level routing to level 2 routing
-          // 将多级路由转换为 2 级路由
           routes = flatMultiLevelRoutes(routes);
           break;
 
@@ -254,7 +276,6 @@ export const usePermissionStore = defineStore({
           routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
           break;
       }
-
       routes.push(ERROR_LOG_ROUTE);
       patchHomeAffix(routes);
       return routes;

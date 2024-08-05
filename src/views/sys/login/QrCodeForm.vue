@@ -15,17 +15,23 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed, unref } from 'vue';
-  import LoginFormTitle from './LoginFormTitle.vue';
-  import { Button, Divider } from 'ant-design-vue';
   import { QrCode } from '@/components/Qrcode';
   import { useI18n } from '@/hooks/web/useI18n';
-  import { useLoginState, LoginStateEnum } from './useLogin';
+  import { Button, Divider } from 'ant-design-vue';
+  import { computed, unref } from 'vue';
+  import LoginFormTitle from './LoginFormTitle.vue';
+  import { LoginStateEnum, useLoginState } from './useLogin';
 
+  /**
+   * 扫码二维码显示的内容
+   */
   const qrCodeUrl = 'https://vben.vvbin.cn/login';
 
   const { t } = useI18n();
   const { handleBackLogin, getLoginState } = useLoginState();
 
+  /**
+   * 是否显示二维码登录表单
+   */
   const getShow = computed(() => unref(getLoginState) === LoginStateEnum.QR_CODE);
 </script>

@@ -4,14 +4,16 @@
   </h2>
 </template>
 <script lang="ts" setup>
-  import { computed, unref } from 'vue';
   import { useI18n } from '@/hooks/web/useI18n';
+  import { computed, unref } from 'vue';
   import { LoginStateEnum, useLoginState } from './useLogin';
 
   const { t } = useI18n();
 
   const { getLoginState } = useLoginState();
-
+  /**
+   * 表单标题
+   */
   const getFormTitle = computed(() => {
     const titleObj = {
       [LoginStateEnum.RESET_PASSWORD]: t('sys.login.forgetFormTitle'),

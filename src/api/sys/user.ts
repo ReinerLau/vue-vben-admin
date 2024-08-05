@@ -7,6 +7,9 @@ import { ErrorMessageMode } from '#/axios';
  * 接口地址枚举
  */
 enum Api {
+  /**
+   * 登录接口地址
+   */
   Login = '/login',
   Logout = '/logout',
   /**
@@ -18,7 +21,9 @@ enum Api {
 }
 
 /**
- * @description: user login api
+ * 登录接口
+ * @param params 登录参数
+ * @param mode 错误提示方式
  */
 export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
   return defHttp.post<LoginResultModel>(

@@ -45,7 +45,9 @@ export enum PermissionModeEnum {
   // 后端
   BACK = 'BACK',
   // route mapping
-  // 路由映射
+  /**
+   * 路由映射
+   */
   ROUTE_MAPPING = 'ROUTE_MAPPING',
 }
 

@@ -1,27 +1,39 @@
+import type { AppRouteRecordRaw, Menu, MenuModule } from '@/router/types';
 import { AppRouteModule } from '@/router/types';
-import type { MenuModule, Menu, AppRouteRecordRaw } from '@/router/types';
 import { findPath, treeMap } from '@/utils/helper/treeHelper';
-import { cloneDeep } from 'lodash-es';
 import { isHttpUrl } from '@/utils/is';
-import { RouteParams } from 'vue-router';
+import { cloneDeep } from 'lodash-es';
 import { toRaw } from 'vue';
+import { RouteParams } from 'vue-router';
 
 export function getAllParentPath<T = Recordable>(treeData: T[], path: string) {
   const menuList = findPath(treeData, (n) => n.path === path) as Menu[];
   return (menuList || []).map((item) => item.path);
 }
-
-// 路径处理
-function joinParentPath(menus: Menu[], parentPath = '') {
+/**
+ * 路径处理
+ */
+function joinParentPath(
+  /**
+   * 菜单列表
+   */
+  menus: Menu[],
+  /**
+   * 父路径
+   */
+  parentPath = '',
+) {
   for (let index = 0; index < menus.length; index++) {
+    /**
+     * 菜单项
+     */
     const menu = menus[index];
-    // https://next.router.vuejs.org/guide/essentials/nested-routes.html
-    // Note that nested paths that start with / will be treated as a root path.
-    // 请注意，以 / 开头的嵌套路径将被视为根路径。
-    // This allows you to leverage the component nesting without having to use a nested URL.
-    // 这允许你利用组件嵌套，而无需使用嵌套 URL。
+    /**
+     * 这允许你利用组件嵌套，而无需使用嵌套 URL。
+     * 请注意，以 / 开头的嵌套路径将被视为根路径。
+     * @tutorial https://next.router.vuejs.org/guide/essentials/nested-routes.html
+     */
     if (!(menu.path.startsWith('/') || isHttpUrl(menu.path))) {
-      // path doesn't start with /, nor is it a url, join parent path
       // 路径不以 / 开头，也不是 url，加入父路径
       menu.path = `${parentPath}/${menu.path}`;
     }
@@ -38,27 +50,45 @@ export function transformMenuModule(menuModule: MenuModule): Menu {
   joinParentPath(menuList);
   return menuList[0];
 }
-
-// 将路由转换成菜单
+/**
+ * 将路由转换成菜单
+ * @param routeModList 路由列表
+ * @param routerMapping 是否开启路由映射
+ */
 export function transformRouteToMenu(routeModList: AppRouteModule[], routerMapping = false) {
-  // 借助 lodash 深拷贝
+  /**
+   * 深拷贝后的路由列表
+   */
   const cloneRouteModList = cloneDeep(routeModList);
+  /**
+   * 需要显示菜单的路由列表
+   */
   const routeList: AppRouteRecordRaw[] = [];
 
   // 对路由项进行修改
-  cloneRouteModList.forEach((item) => {
-    if (routerMapping && item.meta.hideChildrenInMenu && typeof item.redirect === 'string') {
-      item.path = item.redirect;
-    }
+  cloneRouteModList.forEach(
+    /**
+     * @param item 菜单项
+     */
+    (item) => {
+      if (routerMapping && item.meta.hideChildrenInMenu && typeof item.redirect === 'string') {
+        item.path = item.redirect;
+      }
 
-    if (item.meta?.single) {
-      const realItem = item?.children?.[0];
-      realItem && routeList.push(realItem);
-    } else {
-      routeList.push(item);
-    }
-  });
-  // 提取树指定结构
+      if (item.meta?.single) {
+        /**
+         * 实际菜单项
+         */
+        const realItem = item?.children?.[0];
+        realItem && routeList.push(realItem);
+      } else {
+        routeList.push(item);
+      }
+    },
+  );
+  /**
+   * 路由转换成菜单后的列表
+   */
   const list = treeMap(routeList, {
     conversion: (node: AppRouteRecordRaw) => {
       const { meta: { hideMenu = false } = {}, name } = node;
@@ -73,7 +103,6 @@ export function transformRouteToMenu(routeModList: AppRouteModule[], routerMappi
       };
     },
   });
-  // 路径处理
   joinParentPath(list);
   return cloneDeep(list);
 }

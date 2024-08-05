@@ -1,5 +1,5 @@
 /**
- * @description: Login interface parameters
+ * 登录参数
  */
 export interface LoginParams {
   /**
@@ -25,6 +25,9 @@ export interface RoleInfo {
  */
 export interface LoginResultModel {
   userId: string | number;
+  /**
+   * 登录后的 token
+   */
   token: string;
   roles: RoleInfo[];
 }
@@ -41,7 +44,9 @@ export interface GetUserInfoModel {
   userId: string | number;
   // 用户名
   username: string;
-  // 真实名字
+  /**
+   * 用户真实名字
+   */
   realName: string;
   // 头像
   avatar: string;

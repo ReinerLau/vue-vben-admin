@@ -22,6 +22,9 @@ interface UserState {
    * 用户数据
    */
   userInfo: Nullable<UserInfo>;
+  /**
+   * 登录后的 token
+   */
   token?: string;
   /**
    * 角色值列表
@@ -52,6 +55,9 @@ export const useUserStore = defineStore({
     lastUpdateTime: 0,
   }),
   getters: {
+    /**
+     * 获取用户信息
+     */
     getUserInfo(state): UserInfo {
       return state.userInfo || getAuthCache<UserInfo>(USER_INFO_KEY) || {};
     },
@@ -72,6 +78,10 @@ export const useUserStore = defineStore({
     },
   },
   actions: {
+    /**
+     * 缓存 token
+     * @param info 登录后的 token
+     */
     setToken(info: string | undefined) {
       this.token = info ? info : ''; // for null or undefined value
       setAuthCache(TOKEN_KEY, info);
@@ -111,6 +121,9 @@ export const useUserStore = defineStore({
      */
     async login(
       params: LoginParams & {
+        /**
+         * 是否跳转到首页
+         */
         goHome?: boolean;
         /**
          * 错误提示方式
@@ -123,15 +136,16 @@ export const useUserStore = defineStore({
         const data = await loginApi(loginParams, mode);
         const { token } = data;
 
-        // save token
         this.setToken(token);
-        // TODO
         return this.afterLoginAction(goHome);
       } catch (error) {
         return Promise.reject(error);
       }
     },
-    // TODO
+    /**
+     * 登录后的操作
+     * @param goHome 是否返回首页
+     */
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
       if (!this.getToken) return null;
       /**
@@ -148,12 +162,13 @@ export const useUserStore = defineStore({
         const permissionStore = usePermissionStore();
         // 动态路由加载（首次）
         if (!permissionStore.isDynamicAddedRoute) {
-          // TODO
+          /**
+           * 路由列表
+           */
           const routes = await permissionStore.buildRoutesAction();
           [...routes, PAGE_NOT_FOUND_ROUTE].forEach((route) => {
             router.addRoute(route as unknown as RouteRecordRaw);
           });
-          // 记录动态路由加载完成
           permissionStore.setDynamicAddedRoute(true);
         }
 

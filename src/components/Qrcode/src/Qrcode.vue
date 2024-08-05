@@ -4,10 +4,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { watch, PropType, ref, unref, onMounted } from 'vue';
-  import { toCanvas, QRCodeRenderersOptions, LogoType } from './qrcodePlus';
-  import { toDataURL } from 'qrcode';
   import { downloadByUrl } from '@/utils/file/download';
+  import { toDataURL } from 'qrcode';
+  import { onMounted, PropType, ref, unref, watch } from 'vue';
+  import { LogoType, QRCodeRenderersOptions, toCanvas } from './qrcodePlus';
   import { QrcodeDoneEventParams } from './typing';
 
   defineOptions({ name: 'QrCode' });
@@ -22,17 +22,24 @@
       type: Object as PropType<QRCodeRenderersOptions>,
       default: null,
     },
-    // 宽度
+    /**
+     * 渲染二维码宽度
+     */
     width: {
       type: Number as PropType<number>,
       default: 200,
     },
-    // 中间logo图标
+    /**
+     * 二维码中间logo图标
+     */
     logo: {
       type: [String, Object] as PropType<Partial<LogoType> | string>,
       default: '',
     },
-    // img 不支持内嵌logo
+    /**
+     * 渲染标签
+     * @description img 不支持内嵌logo
+     */
     tag: {
       type: String as PropType<'canvas' | 'img'>,
       default: 'canvas',
@@ -55,6 +62,9 @@
       if (!wrapEl) return;
 
       if (tag === 'canvas') {
+        /**
+         * base64 地址
+         */
         const url: string = await toCanvas({
           canvas: wrapEl,
           width,

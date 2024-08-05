@@ -1,4 +1,7 @@
 // token key
+/**
+ * 缓存 token 的 key
+ */
 export const TOKEN_KEY = 'TOKEN__';
 
 /**

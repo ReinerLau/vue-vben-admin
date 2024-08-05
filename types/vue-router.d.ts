@@ -4,6 +4,9 @@ export {};
 
 declare module 'vue-router' {
   interface RouteMeta extends Record<string | number | symbol, unknown> {
+    /**
+     * 路由顺序
+     */
     orderNo?: number;
     // title
     title: string;
@@ -19,7 +22,9 @@ declare module 'vue-router' {
     roles?: RoleEnum[];
     // Whether not to cache
     ignoreKeepAlive?: boolean;
-    // Is it fixed on tab
+    /**
+     * 是否固定在标签栏上
+     */
     affix?: boolean;
     // icon on tab
     icon?: string;
@@ -30,22 +35,32 @@ declare module 'vue-router' {
     transitionName?: string;
     // Whether the route has been dynamically added
     hideBreadcrumb?: boolean;
-    // Hide submenu
+    /**
+     * 是否隐藏子菜单
+     */
     hideChildrenInMenu?: boolean;
     // Carrying parameters
     carryParam?: boolean;
-    // Used internally to mark single-level menus
+    /**
+     * 是否只有一个子菜单
+     */
     single?: boolean;
     // Currently active menu
     currentActiveMenu?: string;
     // Never show in tab
     hideTab?: boolean;
-    // Never show in menu
+    /**
+     * 是否隐藏菜单
+     */
     hideMenu?: boolean;
     isLink?: boolean;
-    // only build for Menu
+    /**
+     * 是否仅用于菜单生成，不存进路由表
+     */
     ignoreRoute?: boolean;
-    // Hide path for children
+    /**
+     * 隐藏子菜单路径
+     */
     hidePathForChildren?: boolean;
   }
 }

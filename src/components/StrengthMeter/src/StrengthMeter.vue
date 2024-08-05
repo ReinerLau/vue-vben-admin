@@ -19,11 +19,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, watch, unref, watchEffect } from 'vue';
-  import { Input } from 'ant-design-vue';
-  import { zxcvbn } from '@zxcvbn-ts/core';
   import { useDesign } from '@/hooks/web/useDesign';
   import { propTypes } from '@/utils/propTypes';
+  import { zxcvbn } from '@zxcvbn-ts/core';
+  import { Input } from 'ant-design-vue';
+  import { computed, ref, unref, watch, watchEffect } from 'vue';
 
   defineOptions({ name: 'StrengthMeter' });
 
@@ -35,18 +35,31 @@
 
   const emit = defineEmits(['score-change', 'change']);
 
+  /**
+   * 密码输入值
+   */
   const innerValueRef = ref('');
   const { prefixCls } = useDesign('strength-meter');
-
+  /**
+   * 密码强度
+   */
   const getPasswordStrength = computed(() => {
     const { disabled } = props;
     if (disabled) return -1;
+    /**
+     * 密码输入值
+     */
     const innerValue = unref(innerValueRef);
+    /**
+     * 密码强度
+     */
     const score = innerValue ? zxcvbn(unref(innerValueRef)).score : -1;
     emit('score-change', score);
     return score;
   });
-
+  /**
+   * 修改密码输入值
+   */
   function handleChange(e) {
     emit('change', e.target.value);
     innerValueRef.value = e.target.value;

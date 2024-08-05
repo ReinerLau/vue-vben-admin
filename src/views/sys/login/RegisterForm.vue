@@ -66,9 +66,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-  /**
-   * 注册表单组件
-   */
   import { CountdownInput } from '@/components/CountDown';
   import { StrengthMeter } from '@/components/StrengthMeter';
   import { useI18n } from '@/hooks/web/useI18n';

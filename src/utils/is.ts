@@ -65,6 +65,10 @@ export const isServer = typeof window === 'undefined';
 
 export const isClient = !isServer;
 
+/**
+ * 校验是否为外链路径
+ * @param path 路径
+ */
 export function isHttpUrl(path: string): boolean {
   const reg = /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/;
   return reg.test(path);

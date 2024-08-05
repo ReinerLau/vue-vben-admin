@@ -164,7 +164,9 @@
     if (!data) return;
     try {
       loading.value = true;
-      // TODO
+      /**
+       * 用户信息
+       */
       const userInfo = await userStore.login({
         password: data.password,
         username: data.account,

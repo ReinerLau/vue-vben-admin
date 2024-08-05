@@ -49,7 +49,9 @@ export const REDIRECT_ROUTE: AppRouteRecordRaw = {
     },
   ],
 };
-
+/**
+ * 错误日志路由
+ */
 export const ERROR_LOG_ROUTE: AppRouteRecordRaw = {
   path: '/error-log',
   name: 'ErrorLog',
