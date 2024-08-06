@@ -19,7 +19,14 @@ const scopeComplete = execSync('git status --porcelain || true')
 
 /** @type {import('cz-git').UserConfig} */
 module.exports = {
+  /**
+   * 忽略对包含 init 提交信息的校验
+   */
   ignores: [(commit) => commit.includes('init')],
+  /**
+   * 加载预设配置
+   * @description 其他预设看 https://github.com/conventional-changelog/commitlint?tab=readme-ov-file#shared-configuration
+   */
   extends: ['@commitlint/config-conventional'],
   rules: {
     'body-leading-blank': [2, 'always'],
