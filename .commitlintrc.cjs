@@ -2,12 +2,17 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+/**
+ * 从目录转换出来的 scope
+ */
 const scopes = fs
   .readdirSync(path.resolve(__dirname, 'src'), { withFileTypes: true })
   .filter((dirent) => dirent.isDirectory())
   .map((dirent) => dirent.name.replace(/s$/, ''));
 
-// precomputed scope
+/**
+ * 根据文件的修改状态计算出对应的 scope
+ */
 const scopeComplete = execSync('git status --porcelain || true')
   .toString()
   .trim()
@@ -25,16 +30,41 @@ module.exports = {
   ignores: [(commit) => commit.includes('init')],
   /**
    * 加载预设配置
-   * @description 其他预设看 https://github.com/conventional-changelog/commitlint?tab=readme-ov-file#shared-configuration
+   * @tutorial 其他预设看 https://github.com/conventional-changelog/commitlint?tab=readme-ov-file#shared-configuration
    */
   extends: ['@commitlint/config-conventional'],
+  /**
+   * 校验规则
+   * @description 会覆盖 extends 的规则
+   */
   rules: {
+    /**
+     * body 前必须包含空行
+     */
     'body-leading-blank': [2, 'always'],
+    /**
+     * footer 前必须包含空行
+     */
     'footer-leading-blank': [1, 'always'],
+    /**
+     * header 最大长度为 108
+     */
     'header-max-length': [2, 'always', 108],
+    /**
+     * subject 不为空
+     */
     'subject-empty': [2, 'never'],
+    /**
+     * type 不为空
+     */
     'type-empty': [2, 'never'],
+    /**
+     * subject 格式（大小写、驼峰之类）
+     */
     'subject-case': [0],
+    /**
+     * 可选 type
+     */
     'type-enum': [
       2,
       'always',
@@ -57,8 +87,15 @@ module.exports = {
       ],
     ],
   },
+  /**
+   * 来自 cz-git 的配置
+   * @tutorial https://cz-git.qbb.sh/zh/config/#javascript-%E6%A8%A1%E6%9D%BF
+   */
   prompt: {
-    /** @use `pnpm commit :f` */
+    /**
+     * 快捷指令
+     * @用法 pnpm commit :f
+     */
     alias: {
       f: 'docs: fix typos',
       r: 'docs: update README',
@@ -66,13 +103,30 @@ module.exports = {
       b: 'build: bump dependencies',
       c: 'chore: update config',
     },
+    /**
+     * 选择 scope 时，empty 和 custom 选项的排列顺序
+     */
     customScopesAlign: !scopeComplete ? 'top' : 'bottom',
+    /**
+     * 选择 scope 时，默认聚焦到哪个 scope
+     */
     defaultScope: scopeComplete,
+    /**
+     * 可选 scope
+     */
     scopes: [...scopes, 'mock'],
+    /**
+     * 选择 issue 标签时是否显示 skip(empty)
+     */
     allowEmptyIssuePrefixs: false,
+    /**
+     * 选择 issue 时是否显示 custom
+     */
     allowCustomIssuePrefixs: false,
 
-    // English
+    /**
+     * 添加额外的 type
+     */
     typesAppend: [
       { value: 'wip', name: 'wip:      work in process' },
       { value: 'workflow', name: 'workflow: workflow improvements' },
